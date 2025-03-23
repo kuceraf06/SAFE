@@ -303,6 +303,10 @@ body {
     transition: opacity 0.3s; /* Add transition for opacity */
 }
 
+.dropEn {
+    margin-left: 27px;
+}
+
 @keyframes slideIn {
     0% {
         transform: translateY(-10%);

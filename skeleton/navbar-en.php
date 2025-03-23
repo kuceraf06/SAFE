@@ -1,7 +1,7 @@
 <nav class="navbar">
             <div class="dropdown">
                 <div class="dropdown-toggle" id="aboutButton"><p class="dropdown-toggle" id="aboutButton">ABOUT EVENT <i class="fa-solid fa-angle-right toggleIcon"></i></p></div>
-                <div class="dropdown-content">
+                <div class="dropdown-content dropEn">
                     <a href="/en/about/" class="before first-child">ABOUT</a>
                     <a href="/en/sponsors/" class="before-hover">SPONSORS</a>
                     <a href="/en/events/" class="before-half s">PAST EVENTS</a>
