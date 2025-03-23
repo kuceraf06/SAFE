@@ -1,0 +1,688 @@
+@media (max-width: 1550px) {
+    .contact-box {
+        width: 930px;
+    }
+
+    .remove-box {
+        width: 930px;
+    }
+
+    .contactMethod {
+        margin-top: 50px;
+        width: 930px;
+        display: flex;
+        padding: 50px;
+    }
+
+    .para {
+        font-size: 11.4px;
+    }
+
+    .contact-text {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 1430px) {
+    .form-row {
+        margin: 0;
+    }
+}
+
+@media (max-width: 1407px) {
+    .gallery img {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 1169px) {
+    .gallery img {
+        margin-left: 0px;
+        max-width: 190px;
+    }
+
+    .content .addBox {
+        display: block;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .content .childBox:not(:first-child) {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 1233px) {
+    .header {
+        padding: 1.5rem 5%;
+    }
+}
+
+@media (max-width: 1167px) {
+    .form-content {
+        display: block;
+    }
+
+    .form-row input[type="text"],
+    .form-row textarea,
+    .form-row input[type="file"] {
+        max-width: 75%;
+    }
+
+    .form-row textarea {
+        margin-left: 13px;
+    }
+
+    .awardedFiles label {
+        margin-right: 50px;
+    }
+
+}
+
+@media (max-width: 1098px) {
+    .before::before {
+        display: none;    
+    }
+    
+    .mobile-translate {
+        display: block;   
+     }
+
+     .mobile-translate a {
+        position: relative;
+        font-family: "Bowlby One SC", sans-serif !important;
+        font-size: 1.15rem;
+        color: #fff;
+        text-decoration: none;
+        margin-right: 4rem;
+     }
+
+    .footer-col ul li a:hover{
+        padding-left: 0px;    
+    }
+
+    .footer-col .social-links a:hover{
+        color: black;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .buttons button:hover span{
+        width: 0;
+    }
+    
+    .buttons button:hover {
+        border: 2px solid rgb(194, 155, 49);
+    }
+
+    .dropdown {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .mobile-header.hide {
+        transform: translateY(-100%);
+    }
+
+    .mobile-menu li a{
+        text-shadow: none;
+        list-style: none;
+        font-weight: 200;
+        color: rgb(205, 204, 204);
+        font-family: "Inter", sans-serif !important;
+        margin-top: -0.5rem;
+        font-size: .9rem;
+        text-align: center;
+    }
+
+    .mobile p:hover {
+        background-color: black;
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+    }
+
+    .mobile-menu li{
+        list-style: none;
+    }
+
+    .header::before {
+        background-color: black;
+    }
+
+    .icons {
+        display: inline-flex;
+    }
+
+    #check:checked~.icons #menu-icon {
+        display: none;
+    }
+
+    .icons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 99%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: black;
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .7);
+        overflow: hidden;
+        transition: 1s ease;
+    }
+
+    #check:checked~.navbar {
+        height: 26rem;
+    }
+
+    .navbar a{
+        display: block;
+        font-size: 1.1rem;
+        padding: 0px;
+        border-radius: 0px;
+        margin: 1.5rem 0;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .2s ease;
+    }
+
+    .navbar p{
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.5rem 0;
+        padding: 0px;
+        border-radius: 0px;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .2s ease;
+    }
+
+    .navbar i{
+        display: none;
+    }
+
+    #check:checked~.navbar a{
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+    #check:checked~.navbar p{
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+    .navbar a::before {
+        display: none;
+    }
+
+    .pc-translate {
+        visibility: hidden;
+    }
+
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+
+    .footer-col img {
+        margin-left: -40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+
+    .main {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1) 40%,rgb(0,0,0) 70%);
+    }
+
+    #break {
+        display: block;
+    }
+
+    .gallery img {
+        max-width: 250px;
+        margin-left: 50px;
+    } 
+
+    .onePlayer {
+        width: 100%;
+    }
+}
+
+@media (max-width: 943px) {
+    .para {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 935px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(0); /* Na mobilních zařízeních je sidebar skrytý */
+    }
+
+    .sidebar.hidden {
+        transform: translateX(-100%); /* Sidebar se posune zpět do viditelné pozice */
+    }
+
+    .close-btn {
+        display: block;
+    }
+
+    .content {
+        margin-left: 0px;
+        margin-top: 50px;
+    }
+}
+
+
+@media (max-width: 872px) {
+    .contactpage-body {
+        background-color: #f2f2f2;
+        width: 100%;
+        margin-top: 2vh;
+    }
+
+    .ticketspage-body {
+        background-color: #f2f2f2;
+        width: 100%;
+        margin-top: 2vh;
+    }
+    
+    .contact-box {
+        grid-template-columns: 1fr;
+    }
+
+    .left iframe {
+        padding: 0;
+    }
+
+    .left img {
+        padding: 15px 40px;
+    }
+
+    .mobile-contact {
+        margin-top: 100px;
+    }
+
+    .contactMethod {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .para {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 860px) {
+    .social-links {
+        width: 25%;
+        margin-top: -10px;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+
+    .onePlayer {
+        display: block;
+    }
+}
+
+@media (max-width: 636px) {
+    #break-2 {
+        display: none;
+    }
+
+    #break-1 {
+        display: block;
+    }
+}
+
+@media (max-width: 834px) {
+    #break-2 {
+        display: block;
+    }
+
+    #none {
+        display: none;
+    }
+}
+
+@media (max-width: 815px) {
+    .pastEvents-content ul li{
+        line-height: normal;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 826px) {
+    .contactMethod {
+        display: grid;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .para {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 796px) {
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 815px) {
+    .heading {
+        padding: 0px 20px;
+    }
+
+    .heading h1 {
+        font-size: 36px;
+    }
+
+    .heading p {
+        font-size: 17px;
+        margin-bottom: 0px;
+    }
+
+    .container {
+        padding: 0px;
+    }
+
+    .aboutpage {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .about-image {
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .about-content p {
+        padding: 0px;
+        font-size: 16px;
+    }
+
+    .button-about {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {   
+    .left iframe {
+        padding: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .gallery img {
+        max-width: 250px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 671px) {
+    .main {
+        margin-top: 62vh;
+    }
+
+    .gallery img {
+        max-width: 300px;
+        margin-top: 50px;
+    }
+
+    .programmeDes textarea {
+        width: 300px;
+    }
+
+    .modal {
+        height: 400px;
+    }
+     
+    .modal-content {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .modal-image img {
+        margin-left: 70px;
+    }
+
+    .awardedPlayers {
+        display: block;
+    }
+
+    .awaredHeading {
+        display: block;
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 595px) {
+    .footer {
+        padding: 5% 0 0 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .adminMain {
+        margin-top: .5rem;
+        width: 90%;
+    }
+}
+
+@media (max-width: 530px) {
+    #programme-break {
+        display: inline;
+    }
+}
+
+@media (max-width: 500px) {
+    .social-links {
+        width: 40%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 530px) {
+    .top-left .miners-logo {
+        font-size: .6rem;
+    }
+
+    .top-right a {
+        font-size: .8rem;
+        margin-left: 0;
+    }
+    
+    .top-right img {
+        width: 19px;
+        border-radius: 3px;
+    }
+
+    .second-image {
+        width: 14.5px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery img {
+        max-width: 250px;
+    }
+
+    .programmeDes textarea {
+        width: 200px;
+    }
+}
+
+@media (max-width: 444px){
+    .main {
+        margin-top: 50vh;
+    }
+
+    .arrow-up {
+        right: 10px;
+    }
+}
+
+@media (max-width: 430px) {
+    .gallery img{
+        max-width: 300px;
+    }
+
+    .content .addBox {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 427px) {
+    #second-programme-break {
+        display: inline;
+    }
+
+    .modal-buttons button, .modal-buttons a, .modal-text p{
+       font-size: .8em;
+    }
+
+    .modal-image img {
+        width: 150px;
+        margin-left: 60px;
+    }
+
+    .modal {
+        height: 300px;
+    }
+}
+
+@media (max-width: 400px) {
+    .footer-col {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 418px) {
+    #btn-break {
+        display: block;
+    }
+
+    .second-btn {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 392px) {
+    .events-table .action-buttons a {
+        margin: 5px;
+    }
+}
+
+@media (max-width: 386px) {
+    .main {
+        margin-top: 52.7vh;
+    }
+    .main h1 {
+        font-size: 32px;
+    }
+
+    .main i{
+        font-size: 17px;
+    }
+
+    .sub-heading {
+        font-size: 17px;
+    }
+
+    .contactIcon {
+        font-size: 25px;
+    }
+
+    .para {
+        font-size: 10px;
+    }
+
+    .different {
+        padding-left: 80px;
+    }
+
+    .different-2 {
+        padding-left: 90px;
+    }
+
+    #alertWarning {
+        display: block;
+    }
+
+}
+
+@media (max-width: 360px) {
+    .programmeButtons {
+        display: block;
+    }
+
+    .programmeButtons button {
+        margin-top: 5px;
+    }
+
+    .programmeButtons button:not(:first-child) {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 345px) {
+    #second-programme-break {
+        display: none;
+    }
+}
