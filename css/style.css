@@ -150,7 +150,7 @@ body {
 .header-icons a img:hover {
     color: rgb(194, 155, 49);
     background-color: rgb(194, 155, 49);
-    border-radius: 3px;
+    border-radius: 4px;
     transition: all 0.3s ease;
 }
 
@@ -180,10 +180,6 @@ body {
     text-decoration: none;
     padding: 6px 8px;
     transition: .2s ease-in-out;
-}
-
-.header p {
-    font-family: "Titan One", sans-serif;
 }
 
 .mobile-translate{

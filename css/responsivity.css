@@ -40,6 +40,12 @@
     .navbar p {
     font-size: .9rem;
     }
+
+    #logo {
+        width: 150px;
+        margin-right: 1rem;
+        margin-left: 35px;
+    }
 }
 
 @media (max-width: 1169px) {
@@ -172,12 +178,20 @@
         visibility: hidden;
     }
 
+    .mobile-translate a{
+        font-size: .9rem;
+    }
+
     .mobile {
         display: block;
     }
 
     .mobile-header.hide {
         transform: translateY(-100%);
+    }
+
+    #menu-icon {
+        font-size: 2.5rem;
     }
 
     .mobile-menu li a{
