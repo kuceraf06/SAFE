@@ -1,13 +1,13 @@
-<div class="top-bar">
-        <div class="top-left">
-            <p class="miners-logo">Miners Kladno Baseball & Softball</p>
+    <div class="topheader">
+        <div>
+            Miners Kladno <span class="special">Baseball & Softball</span>
         </div>
-        <div class="top-right">
-            <a href="https://softball.cz" target="_blank"><img src="/images/softballczechWebWhite.png" alt="softLogo"></a>
-            <a href="https://baseball.cz" target="_blank"><img class="second-image" src="/images/baseballczechWebWhite.png" alt="baseLogo"></a>
-            <a href="https://www.flickr.com/photos/201375961@N07/" target="_blank"><i class='bx bxl-flickr-square'></i></a>
-            <a href="https://www.facebook.com/minerskladno" target="_blank"><i class='bx bxl-facebook-square'></i></a>
-            <a href="https://www.instagram.com/minerskladno/" target="_blank"><i class='bx bxl-instagram-alt'></i></a>
+        <div class="header-icons">
+            <a href="https://softball.cz" target="_blank"><img src="/images/softballczech.png"/></a>
+            <a href="https://www.baseball.cz" target="_blank"><img src="/images/baseballczech.png"/></a>
+            <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><img src="/images/flickr.png"/></a>
+            <a href="https://www.facebook.com/minerskladno" target="_blank"><img src="/images/FB.png"/></a>
+            <a href="https://www.instagram.com/minerskladno/" target="_blank"><img src="/images/IG.png"/></a>
         </div>
     </div>
     <header class="header mobile-header">

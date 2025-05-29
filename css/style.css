@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Bowlby One SC", sans-serif;
+    font-family: "Titan One", sans-serif;
 }
 
 p, h3, h4, a, ul, li, strong, label, input::placeholder, input, select, option, i, button, textarea::placeholder {
@@ -29,52 +29,52 @@ body {
 }
 
 .aboutpage-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
 }
 
 .partners-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
 }
 
 .programmepage-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
 }
 
 .pastevents-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
 }
 
 .harmonogramme-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
 }
 
 .contactpage-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
     width: 100%;
     margin-top: 20vh;
 }
 
 .ticketspage-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
     width: 100%;
     margin-top: 20vh;
 }
 
 .cancelpage-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
     width: 100%;
     margin-top: 30vh;
 }
 
 .awardedpage-body {
-    background-color: #f2f2f2;
+    background-color: #F8F4F4;
 }
 
 .login-body {
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Výška stránky */
-    background-color: #e9ecef;;
+    height: 100vh;
+    background-color: #F8F4F4;;
 }
 
 /*=======================================================================================TO TOP====================================================================================*/
@@ -107,72 +107,83 @@ body {
 }
 
 /*=======================================================================================HEADER====================================================================================*/
-/* Horní bílý pruh */
-.top-bar {
-    background: white;
-    color: black;
+.topheader{
+    font-family: "Titan One", sans-serif;
+    text-transform: uppercase;
     display: flex;
     justify-content: space-between;
+    background-color: #ffffff;
     align-items: center;
-    padding: 0.1rem 2%;
+    padding: 2px 10px 0 10px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 101;
-    border-bottom: 1px solid #ddd;
+    z-index: 999;
 }
 
-.top-left .miners-logo {
+.topheader div {
     font-size: 1rem;
-    font-family: "Bowlby One SC", sans-serif !important;
-    text-decoration: none;
-    color: black;
 }
 
-.top-right a {
-    margin-left: 5px;
-    color: black;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
+.topheader .header-icons a:first-child img {
+    width: 47.2px; /* 39.33 × 1.2 */
+    height: 24px;  /* 20 × 1.2 */
 }
 
-.top-right img {
-    height: auto;
-    width: 30px;
+.topheader .header-icons a:nth-child(2) img {
+    width: 26.4px; /* 22 × 1.2 */
+    height: 24px;
+}
+
+.topheader .header-icons a:nth-child(3) img {
+    width: 24.8px; /* 20.67 × 1.2 */
+    height: 24px;
+}
+
+.topheader .header-icons a:nth-child(4) img,
+.topheader .header-icons a:nth-child(5) img {
+    width: 24px;  /* 20 × 1.2 */
+    height: 24px;
+}
+
+.header-icons a img:hover {
+    color: rgb(194, 155, 49);
+    background-color: rgb(194, 155, 49);
     border-radius: 3px;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease-in-out;
+    transition: all 0.3s ease;
 }
-
-.second-image {
-    width: 22.5px !important;
-}
-
-.top-right a:hover {
-    color: #c29b31; /* Zlatá barva jako v headeru */
-}
-
-.top-right img:hover {
-    filter: grayscale(0%) sepia(100%) hue-rotate(15deg) saturate(320%) brightness(90%);
-}
-
 
 .header {
     position: fixed;
     top: 28px;
     left: 0;
     width: 100%;
-    padding: 1.5rem 5%;
+    padding-right: 5%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     z-index: 100;
     transition: .5s ease;
 }
 
+.navbar {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.pc-translate {
+    margin-left: auto;
+    font-family: "Titan One", sans-serif;
+    font-size: 1.15rem;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 8px;
+    transition: .2s ease-in-out;
+}
+
 .header p {
-    font-family: "Bowlby One SC", sans-serif !important;
+    font-family: "Titan One", sans-serif;
 }
 
 .mobile-translate{
@@ -191,58 +202,31 @@ body {
     z-index: -1;
 }
 
-.header::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4), transparent);
-    transition: .5s;
-}
-
-.header:hover::after {
-    left: 100%;
-}
-
 #logo {
     width: 170px;
-    position: absolute;
+    position: relative;
+    margin-right: 2rem;
+    margin-left: 50px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(0);
     left: 1%;
     z-index: 101;
 }
 
-.navbar a{
-    position: relative;
-    font-family: "Bowlby One SC", sans-serif !important;
+.navbar a,
+.navbar p {
+    font-family: "Titan One", sans-serif;
     font-size: 1.15rem;
     color: #fff;
-    font-weight: 500;
     text-decoration: none;
     padding: 6px 8px;
-    border-radius: 15px;
-    margin-left: 2rem;
-    transition: .3s ease-in-out;
-}
-
-.navbar p{
-    position: relative;
-    font-size: 1.15rem;
-    color: #fff;
-    font-weight: 500;
-    text-decoration: none;
-    margin-left: 2rem;
-    border-radius: 15px;
-    padding: 6px 8px;
+    margin-left: 3vw;
     cursor: pointer;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
 }
 
 .navbar a:hover, .navbar p:hover {
-    background: rgba(194, 155, 49, 0.5);
+    color: rgb(194, 155, 49);
 }
 
 .before::before {
@@ -339,24 +323,41 @@ body {
 
 /*=======================================================================================FOOTER====================================================================================*/
 
-.footer {
-    background-color: #fff;
+footer {
+    margin-top: 2rem;
+    font-family: "Inter", sans-serif !important; 
+    background-color: white;
+}
+
+footer h4 {
+    font-family: "Inter", sans-serif !important; 
+}
+
+ .footer-content {
     padding: 2% 0 0 0;
     width: 100%;
     margin-top: auto;
-    z-index: 1;
+    z-index: 0;
+    overflow: hidden;
+    position: relative;
 }
 
-.container {
-    max-width: 1170px;
+.footer-container {
+    max-width: 1440px;
     width: 90%;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 10px 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
-.row {
+.row-footer {
     display: flex;
     flex-wrap: wrap;
+}
+
+.footer-col:nth-child(2) {
+    width: 18% !important;
 }
 
 .footer-col {
@@ -370,7 +371,7 @@ body {
     margin-bottom: 35px;
     font-weight: 600;
     position: relative;
-    color: black;
+    color: #000;
 }
 
 .footer-col h4::before{
@@ -398,8 +399,7 @@ body {
     font-size: 16px;
     text-transform: capitalize;
     text-decoration: none;
-    color: black;
-    color: #404040;
+    color: #000;
     font-weight: 400;
     display: block;
     width: 0;
@@ -407,15 +407,14 @@ body {
 }
 
 .footer-col ul li a:hover{
-    color: black;
     padding-left: 8px;    
 }
 
 .footer-col img{
-    width: 230px;
-    margin-left: -70px;
+    width: 180px;
+    margin-left: auto;
     margin-bottom: 0px;
-    margin-top: -40px;
+    margin-top: -20px;
 }
 
 .footer-col .social-links a{
@@ -427,12 +426,17 @@ body {
     text-align: center;
     line-height: 40px;
     border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
     color: black;
     transition: all .5s ease;
 }
 
 .social-links {
     width: 100%;
+}
+
+.footer-col {
+    color: #000;
 }
 
 .footer-col .social-links a:not(:first-child){
@@ -444,6 +448,19 @@ body {
     background-color: black;
 }
 
+.contact-footer a {
+    text-decoration: none;
+    color: #000;
+}
+
+.contact-footer p {
+    margin-bottom: 1rem;
+}
+
+.footer-col .copyright {
+    margin-top: 20px;
+}
+
 .copyright {
     text-align: center;
     padding: 3px;
@@ -451,7 +468,7 @@ body {
 }
 
 .copyright a{
-    color: white;
+    color: #fff;
     font-size: small;
     text-decoration: none;
 }
@@ -659,7 +676,7 @@ body {
 }
 
 #history, #location {
-    scroll-margin-top: 250px; /* Posune cílové prvky 100px pod navigační lištu */
+    scroll-margin-top: 250px;
 }
 
 .second-btn {

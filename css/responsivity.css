@@ -35,6 +35,13 @@
     }
 }
 
+@media (max-width: 1234px) {
+    .navbar a,
+    .navbar p {
+    font-size: .9rem;
+    }
+}
+
 @media (max-width: 1169px) {
     .gallery img {
         margin-left: 0px;
@@ -53,9 +60,10 @@
     }
 }
 
-@media (max-width: 1233px) {
-    .header {
-        padding: 1.5rem 5%;
+@media (max-width: 1196px) {
+    .footer-col .social-links a:not(:first-child, :last-child, :nth-child(2)) {
+        margin-left: 0px;
+        margin-top: 20px;
     }
 }
 
@@ -81,23 +89,6 @@
 }
 
 @media (max-width: 1098px) {
-    .before::before {
-        display: none;    
-    }
-    
-    .mobile-translate {
-        display: block;   
-     }
-
-     .mobile-translate a {
-        position: relative;
-        font-family: "Bowlby One SC", sans-serif !important;
-        font-size: 1.15rem;
-        color: #fff;
-        text-decoration: none;
-        margin-right: 4rem;
-     }
-
     .footer-col ul li a:hover{
         padding-left: 0px;    
     }
@@ -115,8 +106,70 @@
         border: 2px solid rgb(194, 155, 49);
     }
 
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+
+    .footer-col img {
+        margin-left: -40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+
+    .main {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1) 40%,rgb(0,0,0) 70%);
+    }
+
+    #break {
+        display: block;
+    }
+
+    .gallery img {
+        max-width: 250px;
+        margin-left: 50px;
+    } 
+
+    .onePlayer {
+        width: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .mobile-translate {
+        display: block;
+        margin-left: auto;   
+     }
+
+    .header-icons a img:hover {
+        color: transparent;
+        background-color: transparent;
+    }
+
+    .mobile-translate a {
+        position: relative;
+        font-family: "Titan One", sans-serif;
+        font-size: 1.15rem;
+        color: #fff;
+        text-decoration: none;
+        margin-right: 4rem;
+     }
+
     .dropdown {
         display: none;
+    }
+
+    .pc-translate {
+        visibility: hidden;
     }
 
     .mobile {
@@ -172,6 +225,7 @@
 
     .navbar {
         position: absolute;
+        display: block;
         top: 99%;
         left: 0;
         width: 100%;
@@ -228,47 +282,6 @@
 
     .navbar a::before {
         display: none;
-    }
-
-    .pc-translate {
-        visibility: hidden;
-    }
-
-    .footer-col {
-        width: 50%;
-        margin-bottom: 30px;
-    }
-
-    .footer-col img {
-        margin-left: -40px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .social-links {
-        width: 100%;
-    }
-
-    .footer-col .social-links a:not(:first-child) {
-        margin-left: 20px;
-        margin-top: 0px;
-    }
-
-    .main {
-        background: linear-gradient(to bottom, rgba(0,0,0,0.1) 40%,rgb(0,0,0) 70%);
-    }
-
-    #break {
-        display: block;
-    }
-
-    .gallery img {
-        max-width: 250px;
-        margin-left: 50px;
-    } 
-
-    .onePlayer {
-        width: 100%;
     }
 }
 
@@ -364,6 +377,11 @@
 
     #break-1 {
         display: block;
+    }
+
+    .footer-col .social-links a:not(:first-child, :last-child, :nth-child(2)) {
+        margin-left: 0px;
+        margin-top: 20px;
     }
 }
 
@@ -498,6 +516,12 @@
     }
 }
 
+@media (max-width: 619px) {
+    .topheader div {
+        font-size: .9rem;
+    }
+}
+
 @media (max-width: 595px) {
     .footer {
         padding: 5% 0 0 0;
@@ -509,22 +533,9 @@
         margin-top: .5rem;
         width: 90%;
     }
-}
 
-@media (max-width: 530px) {
-    #programme-break {
-        display: inline;
-    }
-}
-
-@media (max-width: 500px) {
-    .social-links {
-        width: 40%;
-    }
-
-    .footer-col .social-links a:not(:first-child) {
-        margin-left: 0px;
-        margin-top: 20px;
+    .topheader div {
+        font-size: .8rem;
     }
 }
 
@@ -546,6 +557,53 @@
     .second-image {
         width: 14.5px !important;
     }
+
+    #programme-break {
+        display: inline;
+    }
+
+    .topheader div {
+        font-size: 1rem;
+    }
+
+    .special {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .social-links {
+        width: 40%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+
+    .topheader .header-icons a:first-child img {
+        width: 39.33px;
+        height: 20px;
+    }
+
+    .topheader .header-icons a:nth-child(2) img {
+        width: 22px;
+        height: 20px;
+    }
+
+    .topheader .header-icons a:nth-child(3) img {
+        width: 20.67px;
+        height: 20px;
+    }
+
+    .topheader .header-icons a:nth-child(4) img, .topheader .header-icons a:nth-child(5) img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .topheader div {
+        font-size: .9rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -555,6 +613,41 @@
 
     .programmeDes textarea {
         width: 200px;
+    }
+}
+
+@media (max-width: 450px) {
+    .footer-col {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .footer-col:nth-child(2) {
+        width: 100% !important;
+    }
+
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+
+    .footer-col:last-child {
+        margin-top: 15px;
+    }
+
+    .footer-col:first-child {
+        text-align: center;
+    }
+
+    .footer-col img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
     }
 }
 
@@ -597,6 +690,17 @@
     }
 }
 
+
+@media (max-width: 418px) {
+    #btn-break {
+        display: block;
+    }
+
+    .second-btn {
+        margin-left: 0px;
+    }
+}
+
 @media (max-width: 400px) {
     .footer-col {
         width: 100%;
@@ -610,16 +714,6 @@
     .footer-col .social-links a:not(:first-child) {
         margin-left: 20px;
         margin-top: 0px;
-    }
-}
-
-@media (max-width: 418px) {
-    #btn-break {
-        display: block;
-    }
-
-    .second-btn {
-        margin-left: 0px;
     }
 }
 
