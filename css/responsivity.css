@@ -520,6 +520,11 @@
     .topheader div {
         font-size: .9rem;
     }
+
+    #logo {
+        margin-left: 25px;
+        margin-right: 0rem;
+    }
 }
 
 @media (max-width: 595px) {
