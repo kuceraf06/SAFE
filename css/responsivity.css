@@ -51,8 +51,24 @@
 
 @media (max-width: 1234px) {
     .navbar a,
-    .navbar p {
-    font-size: .9rem;
+    .navbar p, .programmeContent, .heading p, .pastEvents-content p, .pastEvents-content ul, .onePlayer p{
+        font-size: .9rem !important;
+    }
+
+    .heading h1, .partner-wrap h1  {
+        font-size: 36px !important;
+    }
+
+    .pastEvents-content h2 {
+        font-size: 24px !important;
+    }
+
+    .awaredHeading h2 {
+        font-size: 4rem;
+    }
+
+    .about-content h3, .onePlayer h3, .programmeLabel, .ticktes-end {
+        font-size: 1.1rem !important;
     }
 
     #logo {

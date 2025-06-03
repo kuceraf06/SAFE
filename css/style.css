@@ -9,6 +9,10 @@ p, h3, h4, a, ul, li, strong, label, input::placeholder, input, select, option, 
     font-family: "Inter", sans-serif;
 }
 
+h1, h2 {
+    font-weight: 400 !important;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -320,7 +324,7 @@ body {
 /*=======================================================================================FOOTER====================================================================================*/
 
 footer {
-    margin-top: 2rem;
+    margin-top: auto;
     font-family: "Inter", sans-serif !important; 
     background-color: white;
 }
@@ -483,6 +487,7 @@ footer h4 {
 
 .main h1{
     font-size: 40px;
+    font-weight: 400 !important;
     margin-top: 50px;
 }
 
@@ -802,26 +807,39 @@ footer h4 {
     flex-wrap: wrap;
 }
 
+.event-main {
+    background-color: #fff;
+    box-shadow: 1rem 1rem 30px 10px rgba(0, 0, 0, .4);
+    padding: 20px;
+}
+
 .pastEvents-content {
     flex: 1;
 }
 
 .pastEvents-content h2, .pastEvents-content h1{
-    font-size: 36px;
     margin-bottom: 15px;
     color: #333;
     text-align: center;
 }
 
+.pastEvents-content h1 {
+    font-size: 36px;
+}
+
+.pastEvents-content h2 {
+    font-size: 30px;
+}
+
 .pastEvents-content ul {
     line-height: 2.5rem;
-    font-size: 18px;
+    font-size: 1rem;
     list-style: none;
     color: #333;
 }
 
 .pastEvents-content p {
-    font-size: 18px;
+    font-size: 1rem;
     margin: 1rem 0px;
     color: #333;
 }
@@ -928,6 +946,10 @@ footer h4 {
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 100px;
+}
+
+.contact-container textarea {
+    font-family: "Inter", sans-serif;
 }
 
 .mobile-contact {
@@ -1076,7 +1098,6 @@ footer h4 {
     color: green;
     border-radius: 10px;
     justify-content: center;
-    font-weight: bold; 
 }
 
 .alert-failed{
@@ -1087,7 +1108,6 @@ footer h4 {
     color: red;
     border-radius: 10px;
     justify-content: center;
-    font-weight: bold;  
 }
 
 .alert-email{
@@ -1097,8 +1117,7 @@ footer h4 {
     background-color: rgba(300, 0, 0, 0.3);
     color: red;
     border-radius: 10px;
-    justify-content: center;
-    font-weight: bold;   
+    justify-content: center;  
 }
 
 .alert-phone{
@@ -1108,8 +1127,7 @@ footer h4 {
     background-color: rgba(300, 0, 0, 0.3);
     color: red;
     border-radius: 10px;
-    justify-content: center;
-    font-weight: bold;   
+    justify-content: center; 
 }
 
 .line {
@@ -1324,7 +1342,6 @@ option[value=""] {
     background-color: #fff;
     text-align: center;
     font-size: 20px;
-    font-weight: bold;
     padding: 50px;
     border-radius: 10px;
     margin-top: 100px;

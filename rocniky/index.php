@@ -49,6 +49,7 @@
 
                 while ($row = $result->fetch_assoc()) {
                     $images = json_decode($row['images'], true);
+                    echo "<div class='event-main'>";
                     echo "<div class='pastEvents-content'>";
                     echo "<h2>{$row['title']}</h2>";
                     echo "<p>{$row['description']}</p>";
@@ -62,6 +63,7 @@
                             echo "<img src='$correctedPath' alt='Event Image'>";
                         }
                         echo "</center>";
+                        echo "</div>";
                         echo "</div>";
                     }
                     
