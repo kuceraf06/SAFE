@@ -1710,6 +1710,16 @@ option[value=""] {
     margin: 25px 0 50px 0;
 }
 
+.firstBox {
+    display: flex;
+    gap: 20px;
+}
+
+.secondBox {
+    display: flex;
+    gap: 20px;
+}
+
 .childBox {
     padding: 100px 50px;
     background-color: rgb(194, 155, 49);

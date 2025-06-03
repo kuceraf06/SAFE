@@ -23,6 +23,20 @@
     }
 }
 
+@media (max-width: 1540px) {
+    .firstBox {
+        display: block;
+    }
+    
+    .secondBox {
+        display: block;
+    }
+
+    .childBox-2 {
+        margin-top: 20px;
+    }
+}
+
 @media (max-width: 1430px) {
     .form-row {
         margin: 0;
@@ -61,7 +75,11 @@
         margin-right: auto;
     }
 
-    .content .childBox:not(:first-child) {
+    .childBox-2 {
+        margin-top: 0px;
+    }
+
+    .content .childBox {
         margin-top: 50px;
     }
 }
@@ -325,6 +343,11 @@
     .content {
         margin-left: 0px;
         margin-top: 50px;
+    }
+
+    .childBox:hover {
+        transform: scale(1);
+        box-shadow: 0 0px 0px rgb(0, 0, 0);
     }
 }
 
