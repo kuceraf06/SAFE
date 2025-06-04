@@ -4,7 +4,7 @@ include '../skeleton/sendmail.php';
 // Získání aktuálního data
 $currentDate = new DateTime();
 $startDate = new DateTime('2024-11-01');
-$endDate = new DateTime('2025-06-01');
+$endDate = new DateTime('2025-09-01');
 ?>
 <!DOCTYPE html>
 <html lang="cs">
