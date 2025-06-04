@@ -1,3 +1,30 @@
+<?php
+// Připojení k databázi
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mywebsite";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Chyba připojení: " . $conn->connect_error);
+}
+
+// Načtení aktuálního termínu z databáze
+$sql = "SELECT datum_cas FROM termin LIMIT 1";
+$result = $conn->query($sql);
+
+$termin = null;
+if ($result->num_rows > 0) {
+    // Získání hodnoty termínu
+    $row = $result->fetch_assoc();
+    $termin = $row['datum_cas'];
+}
+
+// Zavření spojení
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,7 +43,11 @@
         <main class="main">
             <h1>THE BIGGEST EVENT OF THE YEAR!</h1>
             <br>
-            <i>9. November 2024 at 6pm</i>
+            <?php if ($termin): ?>
+                <i><?php echo date("j. F Y \o\d H:i", strtotime($termin)); ?></i>
+            <?php else: ?>
+                <i>Termín nebyl nastaven.</i>
+            <?php endif; ?>
             <div class="buttons">
                 <a href="reservation/"><button type="button"><span></span>TIKCETS</button></a>
                 <a href="about/"><button type="button"><span></span>ABOUT EVENT</button></a>

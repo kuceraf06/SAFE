@@ -2526,3 +2526,18 @@ color: white;
     display: none;
 }
 
+.dateTime {
+    width: 340px;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+

@@ -817,6 +817,9 @@
         display: block;
     }
 
+    .dateTime {
+        width: 100% !important;
+    }
 }
 
 @media (max-width: 360px) {
