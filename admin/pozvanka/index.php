@@ -12,6 +12,8 @@ if ($conn->connect_error) {
     die("Chyba připojení: " . $conn->connect_error);
 }
 
+$error_message = ''; 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["novy_obrazek"])) {
     $target_dir = "../../images/";
     $filename = basename($_FILES["novy_obrazek"]["name"]);
@@ -23,10 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["novy_obrazek"])) {
             header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
             exit;
         } else {
-            echo "<p style='color:red; margin-top: 15px;'>Chyba při ukládání do databáze.</p>";
+            $error_message = "Chyba při ukládání do databáze.";
         }
     } else {
-        echo "<p style='color:red; margin-top: 15px;'>Nepodařilo se nahrát obrázek.</p>";
+        $error_message = "Nepodařilo se nahrát obrázek.";
     }
 }
 ?>
@@ -65,10 +67,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["novy_obrazek"])) {
                         <input type="file" id="eventImage" name="novy_obrazek" accept="image/*" onchange="previewImage(event)" style="display: none;">
                     </div><br><br>
                     <div id="imagePreview" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
-                    <button type="submit" class="saveButton">Uložit obrázek</button>
+                    <button type="submit" class="saveButton">Změnit obrázek</button>
                     <?php
                     if (isset($_GET['success']) && $_GET['success'] == 1) {
-                        echo "<p style='color:green; margin-top: 15px;'>Obrázek byl úspěšně změněn.</p>";
+                        echo "<p class='success-message'>Obrázek byl úspěšně změněn.</p>";
+                    }
+                    if ($error_message != '') {
+                        echo "<p class='error-message'>$error_message</p>";
                     }
                     ?>
                 </form>

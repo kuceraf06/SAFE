@@ -2551,4 +2551,14 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     border-radius: 5px;
 }
 
+.error-message {
+    color: red;
+    margin-top: 15px;
+}
+        
+.success-message {
+    color: green;
+    margin-top: 15px;
+}
+
 
