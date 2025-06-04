@@ -4,7 +4,7 @@ include '../skeleton/sendmail.php';
 // Získání aktuálního data
 $currentDate = new DateTime();
 $startDate = new DateTime('2024-11-01');
-$endDate = new DateTime('2025-09-01');
+$endDate = new DateTime('2025-06-01');
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -30,8 +30,27 @@ $endDate = new DateTime('2025-09-01');
                 // Zobrazí se formulář pro rezervaci
             ?>
         <div class="contact-box">
+            <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "mywebsite"; // nebo jak se tvá databáze jmenuje
+
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            if ($conn->connect_error) {
+                die("Chyba připojení: " . $conn->connect_error);
+            }
+
+            $sql = "SELECT obrazek FROM invation WHERE id = 1";
+            $result = $conn->query($sql);
+
+            $obrazek = 'images/default.png'; // fallback
+            if ($result && $row = $result->fetch_assoc()) {
+                $obrazek = 'images/' . $row['obrazek'];
+            }
+            ?>
             <div class="left">
-                <img src="../images/invation.png"></img>
+                <img src="../<?php echo $obrazek; ?>" alt="Úvodní obrázek">
             </div>
             <div class="right cz-right">
                 <h1>Rezervace vstupenek</h1>

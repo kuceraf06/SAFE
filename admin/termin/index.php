@@ -50,7 +50,7 @@ function cz_month($monthNumber) {
 <body>
     <?php include '../../skeleton/headerAdmin.php' ?>
     <div class="content">
-        <h2>Upravit Termín</h2><br>
+        <h2>Upravit termín</h2><br>
 
         <!-- Zobrazení aktuálního termínu -->
         <?php if ($currentTerm && $currentTerm['datum_cas']): 
