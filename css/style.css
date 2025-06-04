@@ -180,10 +180,14 @@ body {
     margin-left: auto;
     font-family: "Titan One", sans-serif;
     font-size: 1.15rem;
-    color: #fff;
+    color: rgb(194, 155, 49) !important;
     text-decoration: none;
     padding: 6px 8px;
     transition: .2s ease-in-out;
+}
+
+.pc-translate:hover {
+    color: #fff !important;
 }
 
 .mobile-translate{
@@ -589,6 +593,9 @@ footer h4 {
     margin: 0 auto;
     padding: 10px 20px;
     max-width: 1400px;
+    background-color: #fff;
+    box-shadow: 1rem 1rem 30px 10px rgba(0, 0, 0, .4);
+    padding: 20px;
 }
 
 .about-page hr {
@@ -1026,6 +1033,15 @@ footer h4 {
     transition: 1s;
 }
 
+.field:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    -webkit-text-fill-color: black !important;
+    border: 2px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 5px !important;
+    transition: 1s !important;
+}
+
 .right textarea {
     min-height: 150px;
 }
@@ -1197,7 +1213,7 @@ option[value=""] {
 }
 
 .custom-select:focus {
-    background-image: url('../images/caret-down-solid.svg'); /* Nahraďte obrázkem šipky směrem nahoru */
+    background-image: url('../images/caret-down-solid.svg');
     background-position: right 10px center;
     transition: all .5s ease;
 }
@@ -1223,6 +1239,15 @@ option[value=""] {
     border: 2px solid rgba(0, 0, 0, .2);
     background-color: rgba(223, 189, 97, 0.9);
     transition: 1s;
+}
+
+.tickets-field:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    -webkit-text-fill-color: black !important;
+    border: 2px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 5px !important;
+    transition: 1s !important;
 }
 
 .player-field {
@@ -2074,6 +2099,17 @@ option[value=""] {
     border: 1px solid #ccc; /* Jemný okraj */
     border-radius: 4px;
     font-size: .9em;
+    background-color: white; /* výchozí pozadí */
+    color: black;
+}
+
+.loginForm input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: black !important;
+    border: 1px solid #ccc !important;
+    font-size: .9em !important;
+    border-radius: 4px !important;
 }
 
 .styleForm button {

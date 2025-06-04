@@ -199,7 +199,7 @@
         position: relative;
         font-family: "Titan One", sans-serif;
         font-size: 1.15rem;
-        color: #fff;
+        color: rgb(194, 155, 49) !important;
         text-decoration: none;
         margin-right: 4rem;
      }
