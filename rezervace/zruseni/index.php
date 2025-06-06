@@ -1,5 +1,21 @@
 <?php
 include '../../skeleton/sendmail.php';
+
+// Připojení k databázi
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mywebsite";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Chyba připojení: " . $conn->connect_error);
+}
+
+// Získání stavu rezervace (1 = aktivní, 0 = neaktivní)
+$resStatus = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1")->fetch_assoc();
+$isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -10,13 +26,14 @@ include '../../skeleton/sendmail.php';
 <body class="cancelpage-body">
     <?php include '../../skeleton/header.php'?>
     <div class="mobile-translate">
-        <a href="../../en/cancel/">CZ/EN</a>
+        <a href="../../en/reservation/cancel/">CZ/EN</a>
     </div>
     <?php include '../../skeleton/navbar.php'?>
-        <a href="../../en/cancel/" class="before pc-translate">CZ/EN</a>
+        <a href="../../en/reservation/cancel/" class="before pc-translate">CZ/EN</a>
         </nav>
     </header>
     <main class="cancel-container">
+            <?php if ($isReservationActive): ?>
             <div class="remove-box">
                 <div class="right cz-right">
                     <h1>Zrušení rezervace</h1>
@@ -132,6 +149,9 @@ include '../../skeleton/sendmail.php';
                         <input type="submit" value="Odeslat" name="send" id="button" class="cancel-btn">
                     </form>
                     <p>Pokud chcete znovu vytvořit rezervace klikněte <a href="../">zde</a>.</p>
+                    <?php else: ?>
+                        <div class="ticktes-end">Rezervace vstupenek na akci <span class="gold">SAFE</span> jsou již u konce. Termín na rezervace pro další ročník akce <span class="gold">SAFE</span> bude ještě upřesněn.</div>
+                    <?php endif; ?>
                 </div>
             </div>
         </main>

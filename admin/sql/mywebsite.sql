@@ -146,6 +146,30 @@ INSERT INTO `programmeen` VALUES (4,'5:30pm opening of the hall','2025-03-03 03:
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reservation_status`
+--
+
+DROP TABLE IF EXISTS `reservation_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservation_status` (
+  `id` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation_status`
+--
+
+LOCK TABLES `reservation_status` WRITE;
+/*!40000 ALTER TABLE `reservation_status` DISABLE KEYS */;
+INSERT INTO `reservation_status` VALUES (1,0);
+/*!40000 ALTER TABLE `reservation_status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `termin`
 --
 
@@ -178,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-04 21:57:16
+-- Dump completed on 2025-06-06 15:13:00

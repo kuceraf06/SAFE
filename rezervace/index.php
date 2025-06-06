@@ -1,10 +1,21 @@
 <?php
 include '../skeleton/sendmail.php';
 
-// Získání aktuálního data
-$currentDate = new DateTime();
-$startDate = new DateTime('2024-11-01');
-$endDate = new DateTime('2025-09-01');
+// Připojení k databázi
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mywebsite";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Chyba připojení: " . $conn->connect_error);
+}
+
+// Získání stavu rezervace (1 = aktivní, 0 = neaktivní)
+$resStatus = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1")->fetch_assoc();
+$isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -22,25 +33,9 @@ $endDate = new DateTime('2025-09-01');
         </nav>
     </header>
     <main class="contact-container mobile-contact">
-        <?php
-            // Zkontrolujeme, zda je datum mezi 1.11.2024 a 1.9.2025
-            if ($currentDate >= $startDate && $currentDate < $endDate) {
-                echo '<div class="ticktes-end">Rezervace vstupenek na akci <span class="gold">SAFE 2024</span> jsou již u konce. Vstupenky na akci <span class="gold">SAFE 2025</span> budou dostupné k rezervaci <span class="gold">1.9.2025</span>.</div>';
-            } else {
-                // Zobrazí se formulář pro rezervaci
-            ?>
+        <?php if ($isReservationActive): ?>
         <div class="contact-box">
             <?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "mywebsite"; // nebo jak se tvá databáze jmenuje
-
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            if ($conn->connect_error) {
-                die("Chyba připojení: " . $conn->connect_error);
-            }
-
             $sql = "SELECT obrazek FROM invation WHERE id = 1";
             $result = $conn->query($sql);
 
@@ -270,10 +265,10 @@ $endDate = new DateTime('2025-09-01');
                     <input type="submit" value="Odeslat" name="send" id="button" class="btn">
                 </form>
                 <p>Pokud chcete vaši rezervaci zrušit klikněte <a href="zruseni/">zde</a>.</p>
+                <?php else: ?>
+                    <div class="ticktes-end">Rezervace vstupenek na akci <span class="gold">SAFE</span> jsou již u konce. Termín na rezervace pro další ročník akce <span class="gold">SAFE</span> bude ještě upřesněn.</div>
+                <?php endif; ?>
             </div>
-            <?php
-            }
-            ?>
         </div>
     </main>
     <?php include '../skeleton/footer.php'?>

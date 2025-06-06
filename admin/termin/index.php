@@ -1,4 +1,6 @@
 <?php
+require_once '../../skeleton/auth.php';
+
 // Připojení k databázi
 $servername = "localhost";
 $username = "root";

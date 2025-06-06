@@ -1,5 +1,21 @@
 <?php
-include '../../../Skeleton/sendmail.php';
+include '../../../skeleton/sendmail.php';
+
+// Připojení k databázi
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mywebsite";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Chyba připojení: " . $conn->connect_error);
+}
+
+// Získání stavu rezervace (1 = aktivní, 0 = neaktivní)
+$resStatus = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1")->fetch_assoc();
+$isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,13 +26,14 @@ include '../../../Skeleton/sendmail.php';
     <body class="cancelpage-body">
     <?php include '../../../skeleton/header-en.php'?>
         <div class="mobile-translate">
-            <a href="../../../rezrvace/zruseni/">CZ/EN</a>
+            <a href="../../../rezervace/zruseni/">CZ/EN</a>
         </div>
         <?php include '../../../skeleton/navbar-en.php'?>
-            <a href="../../../rezrvace/zruseni/" class="before pc-translate">CZ/EN</a>
+            <a href="../../../rezervace/zruseni/" class="before pc-translate">CZ/EN</a>
             </nav>
         </header>
         <main class="cancel-container">
+            <?php if ($isReservationActive): ?>
             <div class="remove-box">
                 <div class="right cz-right">
                     <h1>Cancelling a reservation</h1>
@@ -131,6 +148,9 @@ include '../../../Skeleton/sendmail.php';
                         <input type="submit" value="Send" name="send" id="button" class="cancel-btn">
                     </form>
                     <p>If you would like to re-book, click <a href="../">here</a>.</p>
+                    <?php else: ?>
+                        <div class="ticktes-end">Ticket reservations for the <span class="gold">SAFE</span> event are now over. The reservation date for the next year's <span class="gold">SAFE</span> event will be announced later.</div>
+                    <?php endif; ?>
                 </div>
             </div>
         </main>
