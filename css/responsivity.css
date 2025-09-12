@@ -350,11 +350,11 @@
     }
 
     .sidebar {
-        transform: translateX(0); /* Na mobilních zařízeních je sidebar skrytý */
+        transform: translateX(0);
     }
 
     .sidebar.hidden {
-        transform: translateX(-100%); /* Sidebar se posune zpět do viditelné pozice */
+        transform: translateX(-100%);
     }
 
     .close-btn {

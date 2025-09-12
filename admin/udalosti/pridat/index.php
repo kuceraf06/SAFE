@@ -9,19 +9,19 @@ require_once '../../../skeleton/auth.php';
         <script src="https://cdn.tiny.cloud/1/6rzryildd6hlj1iln5s3k2hbidi3h8qs2s9k8cnf7e8nbfi5/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
             tinymce.init({
-                selector: '#eventTitle', // Toto bude pro nadpis
-                toolbar: false, // Definování toolbaru pro nadpis
+                selector: '#eventTitle',
+                toolbar: false,
                 menubar: false,
-                height: 105, // Nastavte výšku pro nadpis
-                plugins: '', // Povolení formátu
-                forced_root_block: 'h2', // Vynucení hlavního bloku na <h2>
-                content_style: 'h2 { color: #333}', // Nastavení výchozí barvy
+                height: 105,
+                plugins: '',
+                forced_root_block: 'h2',
+                content_style: 'h2 { color: #333}',
                 setup: function (editor) {
                     editor.on('change', function () {
-                        tinymce.triggerSave(); // Synchronizuje obsah s <textarea>
+                        tinymce.triggerSave();
                     });
                     editor.on('init', function () {
-                        editor.setContent('<h2></h2>'); // Nastaví výchozí obsah
+                        editor.setContent('<h2></h2>');
                     });
                 }
             });
@@ -29,13 +29,13 @@ require_once '../../../skeleton/auth.php';
             tinymce.init({
                 selector: '#eventDescription',
                 plugins: 'advlist autolink lists link charmap preview anchor pagebreak',
-                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link', // Bez tlačítka pro obrázky
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
                 toolbar_mode: 'floating',
                 menubar: true,
                 height: 514,
                 setup: function (editor) {
                 editor.on('change', function () {
-                    tinymce.triggerSave(); // Synchronizuje obsah TinyMCE s <textarea>
+                    tinymce.triggerSave();
                 });
                 }
             });
@@ -50,7 +50,6 @@ require_once '../../../skeleton/auth.php';
     <body>
     <?php include '../../../skeleton/headerAdmin.php' ?>
         <div class="content">
-        <!-- Formulář pro přidání nové události -->
             <h2>Přidat novou událost</h2>
                 <form action="ulozit/" method="POST" enctype="multipart/form-data" onsubmit="tinyMCE.triggerSave();">
                     <textarea id="eventTitle" name="eventTitle" required></textarea><br><br>    
@@ -58,7 +57,7 @@ require_once '../../../skeleton/auth.php';
                     <div class="custom-file">
                     <label for="eventImage" id="customLabel">Vybrat obrázek</label>
                     <input type="file" id="eventImage" name="eventImages[]" accept="image/*" multiple onchange="combinedFunction()"><br><br>
-                    <div id="imagePreview" style="display: flex; gap: 10px; flex-wrap: wrap;"></div> <!-- Kontejner na náhled obrázků -->
+                    <div id="imagePreview" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
                     </div><br><br>
                     <button type="submit" class="saveButton">Uložit událost</button>
                 </form>

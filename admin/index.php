@@ -1,26 +1,16 @@
 <?php
 require_once '../skeleton/auth.php';
 
-// Připojení k databázi
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mywebsite";
+include '../skeleton/db_connect.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Chyba připojení: " . $conn->connect_error);
-}
-
-// Uložení změny stavu, pokud byl formulář odeslán
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['toggle_reservation'])) {
     $newStatus = isset($_POST['is_active']) ? 1 : 0;
-    $conn->query("UPDATE reservation_status SET is_active = $newStatus WHERE id = 1");
+    $stmt = $conn->prepare("UPDATE reservation_status SET is_active = :status WHERE id = 1");
+    $stmt->execute([':status' => $newStatus]);
 }
 
-// Načtení aktuálního stavu
-$resStatus = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1")->fetch_assoc();
+$stmt = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1");
+$resStatus = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : null;
 $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
 ?>
 

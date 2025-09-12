@@ -1,16 +1,7 @@
 <?php
 require_once '../../skeleton/auth.php';
 
-// Připojení k databázi – MUSÍ BÝT ZDE!
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mywebsite";
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Chyba připojení: " . $conn->connect_error);
-}
+include '../../skeleton/db_connect.php';
 
 $error_message = ''; 
 
@@ -20,12 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["novy_obrazek"])) {
     $target_file = $target_dir . $filename;
 
     if (move_uploaded_file($_FILES["novy_obrazek"]["tmp_name"], $target_file)) {
-        $sql = "UPDATE invation SET obrazek = '$filename' WHERE id = 1";
-        if ($conn->query($sql) === TRUE) {
+        try {
+            $stmt = $conn->prepare("UPDATE invation SET obrazek = :filename WHERE id = 1");
+            $stmt->execute([':filename' => $filename]);
+
+            // Pokud je vše OK
             header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
             exit;
-        } else {
-            $error_message = "Chyba při ukládání do databáze.";
+        } catch (PDOException $e) {
+            $error_message = "Chyba při ukládání do databáze: " . $e->getMessage();
         }
     } else {
         $error_message = "Nepodařilo se nahrát obrázek.";
@@ -48,18 +42,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["novy_obrazek"])) {
         <div class="content">
         <h2>Změnit pozvánku</h2><br>
             <?php
-                // Výpis aktuálního obrázku
                 $sql = "SELECT obrazek FROM invation WHERE id = 1";
-                $result = $conn->query($sql);
+                $stmt = $conn->query($sql);
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if ($result && $row = $result->fetch_assoc()) {
+                if ($row) {
                     $aktualni_obrazek = $row['obrazek'];
                     echo '<div class="preview-box">';
                     echo '<img src="../../images/' . htmlspecialchars($aktualni_obrazek) . '" style="max-width:300px;">';
                     echo '</div>';
                 }
             ?>
-                        <form method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="custom-file">
                         <label for="eventImage" id="customLabel">
                             Vybrat obrázek
@@ -81,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["novy_obrazek"])) {
         <script>
         function previewImage(event) {
             const preview = document.getElementById('imagePreview');
-            preview.innerHTML = ""; // Vyčistit předchozí náhled
+            preview.innerHTML = "";
 
             const file = event.target.files[0];
             if (file && file.type.startsWith('image/')) {

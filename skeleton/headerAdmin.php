@@ -16,24 +16,21 @@
         <li><a href="/admin/EN/udalosti/"><i class='bx bx-calendar-event'></i>EN - Události</a></li>
         <li><a href="/admin/EN/program/"><i class='bx bxs-spreadsheet'></i>EN - Program</a></li>
     </ul>
-    <!-- Přidáme funkční odhlášení -->
     <a href="/admin/logout/" class="logout" onclick="confirmLogout(event)">
         <i class='bx bx-user-x'></i>Odhlásit se
     </a>
 </div>
 
 <script>
-    // Funkce pro otevření/zavření sidebaru
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         if (sidebar) {
-            sidebar.classList.toggle('hidden');  // Pokud je "hidden", přepne na "open" a naopak
+            sidebar.classList.toggle('hidden');
         } else {
             console.error('Element #sidebar nebyl nalezen.');
         }
     }
 
-    // Funkce pro potvrzení odhlášení
     function confirmLogout(event) {
         event.preventDefault();
         const confirmAction = confirm("Opravdu se chcete odhlásit?");

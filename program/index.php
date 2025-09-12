@@ -19,29 +19,20 @@
             </div>
             <div class="programme">
             <?php
-            // Připojení k databázi
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "mywebsite";
+            include '../skeleton/db_connect.php';
 
-            $conn = new mysqli($servername, $username, $password, $dbname);
+            try {
+                $stmt = $conn->query("SELECT description FROM programme ORDER BY created_at ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($conn->connect_error) {
-                die("Chyba připojení: " . $conn->connect_error);
-            }
-
-            $sql = "SELECT description FROM programme ORDER BY created_at ASC";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+                foreach ($rows as $row) {
                     echo "<div>";
                     echo "<label class='programmeLabel'>" . htmlspecialchars($row['description']) . "</label>";
                     echo "</div>";
                 }
+            } catch (PDOException $e) {
+                echo "<p>Chyba při načítání programu: " . $e->getMessage() . "</p>";
             }
-            $conn->close();
             ?>
             </div>
         </main>

@@ -29,7 +29,6 @@
                         $message = $_POST["message"];
                         $toEmail = "safe@minerskladno.cz";
                         
-                        // Check if the email is valid
                         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                             ?>
                             <center><div class="alert-email">
@@ -81,14 +80,12 @@
                             </html>
                             ";
                             
-                            // Send email only if the email is valid and phone number is valid
                             if (sendEmail($toEmail, $subject, $mailMessage, $mailHeaders)) {
                                 ?>
                                 <center><div class="alert-success">
                                 <?php echo "Your email has been successfully sent to \"$toEmail\"" ?>
                                 </div></center>
                                 <?php
-                                // Send a copy of the email to the user
                                 $toUserSubject = "Copy of your message";
                                 $toUserSubject = mb_encode_mimeheader($toUserSubject, "UTF-8", "Q");
                                 $toUserHeaders = "From: no-reply\r\n";

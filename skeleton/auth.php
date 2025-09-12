@@ -1,17 +1,14 @@
 <?php 
 session_start();
 
-// Zpracování cookies pro obnovení přihlášení
 if (empty($_SESSION['logged_in']) && !empty($_COOKIE['rememberMe']) && $_COOKIE['rememberMe'] === 'true') {
-    $_SESSION['logged_in'] = true; // Obnovení session z cookies
+    $_SESSION['logged_in'] = true;
 }
 
-// Nastavení časového limitu pro odhlášení
-define('INACTIVITY_LIMIT', 30 * 60); // 30 minut
-define('TEMPORARY_LOGIN_LIMIT', 6 * 60 * 60); // 6 hodin v sekundách
-define('REMEMBER_ME_LIMIT', 30 * 24 * 60 * 60); // 30 dní v sekundách
+define('INACTIVITY_LIMIT', 30 * 60);
+define('TEMPORARY_LOGIN_LIMIT', 6 * 60 * 60);
+define('REMEMBER_ME_LIMIT', 30 * 24 * 60 * 60);
 
-// Funkce pro kontrolu nečinnosti
 function checkInactivity()
 {
     if (isset($_SESSION['last_activity'])) {
@@ -19,36 +16,31 @@ function checkInactivity()
         if ($inactivityTime > INACTIVITY_LIMIT) {
             session_unset();
             session_destroy();
-            setcookie('rememberMe', '', time() - 3600, "/"); // Smazání cookie
-            header('Location: /admin/login/?message=inactive'); // Přesměrování s důvodem odhlášení
+            setcookie('rememberMe', '', time() - 3600, "/");
+            header('Location: /admin/login/?message=inactive');
             exit;
         }
     }
-    $_SESSION['last_activity'] = time(); // Aktualizace času poslední aktivity
+    $_SESSION['last_activity'] = time();
 }
 
-// Kontrola, zda je uživatel přihlášen
 if (empty($_SESSION['logged_in'])) {
-    header('Location: /admin/login/'); // Přesměrování na přihlášení, pokud není přihlášen
+    header('Location: /admin/login/');
     exit;
 }
 
-// Kontrola, zda je zaškrtnuto "Zůstat přihlášen"
 if (empty($_COOKIE['rememberMe'])) {
-    // Kontrola nečinnosti
     checkInactivity();
 
-    // Pokud uživatel nemá "Zůstat přihlášen" a uplynul časový limit, odhlásit
     if (isset($_SESSION['logged_in']) && (time() - $_SESSION['login_time'] > TEMPORARY_LOGIN_LIMIT)) {
         session_unset();
         session_destroy();
-        setcookie('rememberMe', '', time() - 3600, "/"); // Smazání cookie
-        header('Location: /admin/login/'); // Přesměrování bez zprávy
+        setcookie('rememberMe', '', time() - 3600, "/");
+        header('Location: /admin/login/');
         exit;
     }
 }
 
-// Aktualizace času nečinnosti při každé stránce
 $_SESSION['last_activity'] = time();
-$_SESSION['login_time'] = $_SESSION['login_time'] ?? time(); // Nastavení počátečního času přihlášení
+$_SESSION['login_time'] = $_SESSION['login_time'] ?? time();
 ?>

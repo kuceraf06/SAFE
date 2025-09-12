@@ -37,19 +37,15 @@ require_once '../../../skeleton/auth.php';
     document.getElementById('addRowButton').addEventListener('click', function () {
         const container = document.getElementById('programmeContainer');
 
-        // Vytvoření nové div pro řádek programu
         const newRow = document.createElement('div');
         newRow.classList.add('programme-row');
 
-        // Přidání vstupních polí pro čas a popis
         newRow.innerHTML = `
             <div class="programmeDes newProgrammeDes"><textarea name="description[]" placeholder="Popis programu" required></textarea>
             <button type="button" class="removeRowButton"><i class='bx bxs-tag-x'></i></button></div>`;
 
-        // Přidání nové div do kontejneru
         container.appendChild(newRow);
 
-        // Přidání funkce pro odstranění řádku
         const removeButton = newRow.querySelector('.removeRowButton');
         removeButton.addEventListener('click', function () {
             container.removeChild(newRow);

@@ -32,7 +32,6 @@ include '../skeleton/sendmail.php';
                         $message = $_POST["message"];
                         $toEmail = "safe@minerskladno.cz";
                         
-                        // Check if the email is valid
                         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                             ?>
                             <center><div class="alert-email">
@@ -83,18 +82,13 @@ include '../skeleton/sendmail.php';
                             </body>
                             </html>
                             ";
-                            
-                            // Send email only if the email is valid and phone number is valid
                           
-
-
                             if (sendEmail($toEmail, $subject, $mailMessage)) {
                                 ?>
                                 <center><div class="alert-success">
                                 <?php echo "Váš mail úspěšně odeslán na \"$toEmail\"" ?>
                                 </div></center>
                                 <?php
-                                // Send a copy of the email to the user
                                 $toUserSubject = "Kopie vaší zprávy";
                                 $toUserSubject = mb_encode_mimeheader($toUserSubject, "UTF-8", "Q");
                                 $toUserHeaders = "From: no-reply\r\n";

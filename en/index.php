@@ -1,29 +1,13 @@
 <?php
-// Připojení k databázi
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mywebsite";
+include '../skeleton/db_connect.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Chyba připojení: " . $conn->connect_error);
+try {
+    $stmt = $conn->query("SELECT datum_cas FROM termin LIMIT 1");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $termin = $row ? $row['datum_cas'] : null;
+} catch (PDOException $e) {
+    die("Chyba při načítání termínu: " . $e->getMessage());
 }
-
-// Načtení aktuálního termínu z databáze
-$sql = "SELECT datum_cas FROM termin LIMIT 1";
-$result = $conn->query($sql);
-
-$termin = null;
-if ($result->num_rows > 0) {
-    // Získání hodnoty termínu
-    $row = $result->fetch_assoc();
-    $termin = $row['datum_cas'];
-}
-
-// Zavření spojení
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +30,7 @@ $conn->close();
             <?php if ($termin): ?>
                 <i><?php echo date("j. F Y \o\d H:i", strtotime($termin)); ?></i>
             <?php else: ?>
-                <i>Termín nebyl nastaven.</i>
+                <i>The date has not been set.</i>
             <?php endif; ?>
             <div class="buttons">
                 <a href="reservation/"><button type="button"><span></span>TIKCETS</button></a>

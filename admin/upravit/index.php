@@ -35,10 +35,9 @@
             }
         });
 
-        // Funkce pro zobrazení náhledu obrázků
         function previewImages(event) {
             let preview = document.getElementById('preview');
-            preview.innerHTML = ''; // Vymazání předchozích náhledů
+            preview.innerHTML = '';
 
             Array.from(event.target.files).forEach(file => {
                 let reader = new FileReader();
@@ -69,15 +68,7 @@
         <h2>Upravit událost</h2>
 
         <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "mywebsite";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-            die("Připojení selhalo: " . $conn->connect_error);
-        }
+        include '../../skeleton/db_connect.php';
 
         $eventId = isset($_GET['id']) ? intval($_GET['id']) : 0;
         if ($eventId <= 0) {
@@ -86,15 +77,13 @@
 
         $sql = "SELECT * FROM pastevents WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $eventId);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->execute([$eventId]);
+        $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result->num_rows === 0) {
+        if (!$event) {
             die("Událost nenalezena.");
         }
-
-        $event = $result->fetch_assoc();
+        
         $images = json_decode($event['images'], true) ?? [];
         ?>
 

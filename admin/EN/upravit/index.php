@@ -42,11 +42,9 @@ require_once '../../../skeleton/auth.php';
                 }
             });
 
-            
-        // Funkce pro zobrazení náhledu obrázků
         function previewImages(event) {
             let preview = document.getElementById('preview');
-            preview.innerHTML = ''; // Vymazání předchozích náhledů
+            preview.innerHTML = '';
 
             Array.from(event.target.files).forEach(file => {
                 let reader = new FileReader();
@@ -70,64 +68,50 @@ require_once '../../../skeleton/auth.php';
             <h2>EN Upravit událost</h2>
 
             <?php
-            // Připojení k databázi
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "mywebsite";
+            include '../../../skeleton/db_connect.php';
 
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            if ($conn->connect_error) {
-                die("Připojení selhalo: " . $conn->connect_error);
-            }
-
-            // Načtení ID události
             $eventId = isset($_GET['id']) ? intval($_GET['id']) : 0;
             if ($eventId <= 0) {
                 die("Neplatné ID události.");
             }
 
-            // Načtení dat z databáze
-            $sql = "SELECT * FROM pasteventsen WHERE id = ?";
+            $sql = "SELECT * FROM pasteventsen WHERE id = :id";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $eventId);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            $stmt->execute([':id' => $eventId]);
+            $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($result->num_rows === 0) {
+            if (!$event) {
                 die("Událost nenalezena.");
             }
 
-            $event = $result->fetch_assoc();
             $images = json_decode($event['images'], true) ?? [];
             ?>
-        <form action="aktualizace/index.php?id=<?= htmlspecialchars($eventId) ?>" method="POST" enctype="multipart/form-data" onsubmit="tinyMCE.triggerSave();">
-            <textarea id="eventTitle" name="title" required><?= htmlspecialchars($event['title']) ?></textarea><br><br>
-            <textarea id="eventDescription" name="description" required><?= htmlspecialchars($event['description']) ?></textarea><br><br>
+            <form action="aktualizace/index.php?id=<?= htmlspecialchars($eventId) ?>" method="POST" enctype="multipart/form-data" onsubmit="tinyMCE.triggerSave();">
+                <textarea id="eventTitle" name="title" required><?= htmlspecialchars($event['title']) ?></textarea><br><br>
+                <textarea id="eventDescription" name="description" required><?= htmlspecialchars($event['description']) ?></textarea><br><br>
 
-            <h3>Obrázky události</h3>
-            <div id="images">
-                <?php if (!empty($images)): ?>
-                    <?php foreach ($images as $index => $image): ?>
-                        <div class="image-item">
-                            <img src="../../../images/<?= htmlspecialchars(basename($image)) ?>" alt="Obrázek" width="100"><br>
-                            <input type="checkbox" id="delete_<?= $index ?>" name="delete_images[]" value="<?= htmlspecialchars(basename($image)) ?>">
-                            <label for="delete_<?= $index ?>"></label>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Žádné obrázky nejsou přidány.</p>
-                <?php endif; ?>
-            </div>
+                <h3>Obrázky události</h3>
+                <div id="images">
+                    <?php if (!empty($images)): ?>
+                        <?php foreach ($images as $index => $image): ?>
+                            <div class="image-item">
+                                <img src="../../../images/<?= htmlspecialchars(basename($image)) ?>" alt="Obrázek" width="100"><br>
+                                <input type="checkbox" id="delete_<?= $index ?>" name="delete_images[]" value="<?= htmlspecialchars(basename($image)) ?>">
+                                <label for="delete_<?= $index ?>"></label>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Žádné obrázky nejsou přidány.</p>
+                    <?php endif; ?>
+                </div>
 
-            <!-- Label místo select pro výběr souboru -->
-            <label class="custom-label" for="new_images">Vyberte obrázek</label>
-            <input type="file" name="new_images[]" id="new_images" multiple onchange="previewImages(event)"><br><br>
+                <label class="custom-label" for="new_images">Vyberte obrázek</label>
+                <input type="file" name="new_images[]" id="new_images" multiple onchange="previewImages(event)"><br><br>
 
-            <div id="preview"></div><br> <!-- Zde se zobrazí náhledy -->
+                <div id="preview"></div><br>
 
-            <button type="submit" class="saveButton">Uložit změny</button>
-        </form>
+                <button type="submit" class="saveButton">Uložit změny</button>
+            </form>
         </div>
     </body>
 </html>

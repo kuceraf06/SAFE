@@ -1,27 +1,15 @@
 <?php
-// Připojení k databázi
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mywebsite";
+include 'skeleton/db_connect.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Chyba připojení: " . $conn->connect_error);
-}
-
-// Načtení aktuálního termínu z databáze
 $sql = "SELECT datum_cas FROM termin LIMIT 1";
 $result = $conn->query($sql);
 
 $termin = null;
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+$row = $result->fetch(PDO::FETCH_ASSOC);
+if ($row) {
     $termin = $row['datum_cas'];
 }
 
-// Funkce pro české měsíce
 function cz_month($monthNumber) {
     $months = [
         1 => 'ledna',

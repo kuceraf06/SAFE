@@ -4,7 +4,7 @@ function sendEmail($toEmail, $subject, $content ) {
     $url = "https://api.sendgrid.com/v3/mail/send";
     $headers = [
         "Content-Type: application/json",
-        "Authorization: Bearer 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" // Use your actual SendGrid API key here
+        "Authorization: Bearer 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"
     ];
 
     $data = [
@@ -47,7 +47,7 @@ function sendEmail($toEmail, $subject, $content ) {
 
     curl_close($ch);
 
-    // Check if the response status code is 202 (SendGrid returns 202 for successful request)
+
     return $httpCode === 202;
 }
 

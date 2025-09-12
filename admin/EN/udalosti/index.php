@@ -12,11 +12,10 @@ require_once '../../../skeleton/auth.php';
         }
     </style>
     <script>
-        // Funkce pro potvrzení smazání
         function confirmDelete(event, url) {
-            event.preventDefault(); // Zabrání standardní akci odkazu
+            event.preventDefault();
             if (confirm("Opravdu chcete smazat tuto událost?")) {
-                window.location.href = url; // Přesměrování na URL pro mazání
+                window.location.href = url;
             }
         }
     </script>
@@ -37,57 +36,42 @@ require_once '../../../skeleton/auth.php';
         </thead>
         <tbody>
         <?php
-        // Připojení k databázi
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "mywebsite";
+        include '../../../skeleton/db_connect.php';
 
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Chyba připojení: " . $conn->connect_error);
-        }
-
-        // Kontrola, zda je nastavena akce na mazání
         if (!empty($_GET['delete_id'])) {
             $delete_id = intval($_GET['delete_id']);
-            $delete_sql = "DELETE FROM pasteventsen WHERE id = $delete_id";
+            $delete_sql = "DELETE FROM pasteventsen WHERE id = ?";
+            $stmt = $conn->prepare($delete_sql);
+            $stmt->execute([$delete_id]);
 
-            if ($conn->query($delete_sql) === TRUE) {
-                header("Location: ./"); // Přesměrování na stejnou stránku
-                exit;
+            header("Location: ./");
+            exit;
+        }
+        try {
+            $sql = "SELECT id, title, created_at FROM pasteventsen ORDER BY id DESC";
+            $stmt = $conn->query($sql);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($rows) > 0) {
+                foreach ($rows as $row) {
+                    $created_at = !empty($row['created_at']) ? date('d.m.Y H:i', strtotime($row['created_at'])) : 'Unknown date';
+                    $title = !empty($row['title']) ? strip_tags($row['title']) : 'Untitled';
+
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</td>";
+                    echo "<td>" . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . "</td>";
+                    echo "<td class='action-buttons'>";
+                    echo "<a href='../upravit/?id=" . $row['id'] . "' class='edit-btn'><i class='bx bx-edit-alt'></i></a>";
+                    echo "<a href='#' class='delete-btn' onclick='confirmDelete(event, \"?delete_id=" . $row['id'] . "\")'><i class='bx bxs-tag-x'></i></a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
             } else {
-                echo "<script>alert('Chyba při mazání události: " . addslashes($conn->error) . "');</script>";
+                echo "<tr><td colspan='3'>Žádný události nejsou k dispozici.</td></tr>";
             }
+        } catch (PDOException $e) {
+            echo "<tr><td colspan='3'>Chyba v dotazu: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
         }
-
-        // Načtení událostí
-        $sql = "SELECT id, title, created_at FROM pasteventsen ORDER BY id DESC";
-        $result = $conn->query($sql);
-
-        if (!$result) {
-            die("Chyba v dotazu: " . $conn->error);
-        }
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $created_at = isset($row['created_at']) ? date('d.m.Y H:i', strtotime($row['created_at'])) : 'Neznámé datum';
-                $title = isset($row['title']) && !empty($row['title']) ? strip_tags($row['title']) : 'Bez názvu';
-
-                echo "<tr>";
-                echo "<td>" . $created_at . "</td>";
-                echo "<td>" . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . "</td>";
-                echo "<td class='action-buttons'>";
-                echo "<a href='../upravit/?id=" . $row['id'] . "' class='edit-btn'><i class='bx bx-edit-alt'></i></a>";
-                echo "<a href='#' class='delete-btn' onclick='confirmDelete(event, \"?delete_id=" . $row['id'] . "\")'><i class='bx bxs-tag-x'></i></a>";
-                echo "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='3'>Žádné události nejsou k dispozici.</td></tr>";
-        }
-        $conn->close();
         ?>
         </tbody>
     </table>

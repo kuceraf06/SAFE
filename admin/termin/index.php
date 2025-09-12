@@ -1,24 +1,7 @@
 <?php
 require_once '../../skeleton/auth.php';
+include '../../skeleton/db_connect.php';
 
-// Připojení k databázi
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mywebsite";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Chyba připojení: " . $conn->connect_error);
-}
-
-// Získání aktuálního termínu
-$sql = "SELECT datum_cas FROM termin WHERE id=1";
-$result = $conn->query($sql);
-$currentTerm = $result->fetch_assoc();
-
-// Funkce pro české měsíce
 function cz_month($monthNumber) {
     $months = [
         1 => 'ledna',
@@ -36,16 +19,38 @@ function cz_month($monthNumber) {
     ];
     return $months[$monthNumber] ?? '';
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['datum_cas'])) {
+    $datum_cas = $_POST['datum_cas'];
+    try {
+        $sql = "UPDATE termin SET datum_cas = :datum_cas WHERE id = 1";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([':datum_cas' => $datum_cas]);
+    } catch (PDOException $e) {
+        $errorMessage = "Chyba při aktualizaci: " . htmlspecialchars($e->getMessage());
+    }
+}
+
+$sql = "SELECT datum_cas FROM termin WHERE id=1";
+$stmt = $conn->query($sql);
+$currentTerm = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$inputValue = '';
+if ($currentTerm && $currentTerm['datum_cas']) {
+    $dt = new DateTime($currentTerm['datum_cas']);
+    $inputValue = $dt->format('Y-m-d\TH:i');
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+    <meta charset="UTF-8">
     <title>SAFE | Termín</title>
     <style>
-        * {
-            font-family: "Poppins", sans-serif !important;
-        }
+        * { font-family: "Poppins", sans-serif !important; }
+        .dateTime { padding: 5px; font-size: 16px; margin-bottom: 10px; }
+        .saveButton { padding: 8px 16px; font-size: 16px; cursor: pointer; }
     </style>
     <?php include '../../skeleton/head.php' ?>
 </head>
@@ -54,7 +59,14 @@ function cz_month($monthNumber) {
     <div class="content">
         <h2>Upravit termín</h2><br>
 
-        <!-- Zobrazení aktuálního termínu -->
+        <?php if (!empty($successMessage)): ?>
+            <p style="color: green; margin-top: 15px;"><?= $successMessage ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($errorMessage)): ?>
+            <p style="color: red; margin-top: 15px;"><?= $errorMessage ?></p>
+        <?php endif; ?>
+
         <?php if ($currentTerm && $currentTerm['datum_cas']): 
             $datetime = new DateTime($currentTerm['datum_cas']);
             $day = $datetime->format('j');
@@ -62,26 +74,14 @@ function cz_month($monthNumber) {
             $year = $datetime->format('Y');
             $time = $datetime->format('H:i');
         ?>
-            <p><strong>Aktuální termín:</strong> <?php echo "$day. $month $year od $time"; ?></p>
+            <p><strong>Aktuální termín:</strong> <?= "$day. $month $year od $time" ?></p>
         <?php else: ?>
             <p>Aktuální termín není nastaven.</p>
         <?php endif; ?>
-        <!-- Formulář pro nastavení nového termínu -->
+
         <form action="" method="POST">
-            <input type="datetime-local" id="datum_cas" name="datum_cas" class="dateTime" value="<?php echo $currentTerm ? $currentTerm['datum_cas'] : ''; ?>" required><br>
-            <button type="submit" class="saveButton">Upravit termín</button><br>
-            <?php 
-            // Zpracování formuláře pro nastavení termínu
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['datum_cas'])) {
-                $datum_cas = $_POST['datum_cas'];
-                $sql = "UPDATE termin SET datum_cas='$datum_cas' WHERE id=1";  // Předpokládám, že je jen jeden záznam s ID=1
-                if ($conn->query($sql) === TRUE) {
-                    echo '<p style="color: green; margin-top: 15px;">Termín byl úspěšně aktualizován.</p>';
-                } else {
-                    echo '<p style="color: red; margin-top: 15px;">Chyba při aktualizaci: ' . htmlspecialchars($conn->error) . '</p>';
-                }
-            }
-            ?>
+            <input type="datetime-local" id="datum_cas" name="datum_cas" class="dateTime" value="<?= htmlspecialchars($inputValue) ?>" required><br>
+            <button type="submit" class="saveButton">Upravit termín</button>
         </form>
     </div>
 </body>

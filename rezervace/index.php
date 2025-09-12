@@ -1,21 +1,15 @@
 <?php
 include '../skeleton/sendmail.php';
 
-// Připojení k databázi
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mywebsite";
+include '../skeleton/db_connect.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Chyba připojení: " . $conn->connect_error);
+try {
+    $stmt = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $isReservationActive = $row ? $row['is_active'] : 0;
+} catch (PDOException $e) {
+    die("Chyba při načítání stavu rezervace: " . $e->getMessage());
 }
-
-// Získání stavu rezervace (1 = aktivní, 0 = neaktivní)
-$resStatus = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1")->fetch_assoc();
-$isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -36,12 +30,12 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
         <?php if ($isReservationActive): ?>
         <div class="contact-box">
             <?php
-            $sql = "SELECT obrazek FROM invation WHERE id = 1";
-            $result = $conn->query($sql);
-
-            $obrazek = 'images/default.png'; // fallback
-            if ($result && $row = $result->fetch_assoc()) {
-                $obrazek = 'images/' . $row['obrazek'];
+            try {
+                $stmtImg = $conn->query("SELECT obrazek FROM invation WHERE id = 1");
+                $rowImg = $stmtImg->fetch(PDO::FETCH_ASSOC);
+                $obrazek = $rowImg ? 'images/' . $rowImg['obrazek'] : 'images/default.png';
+            } catch (PDOException $e) {
+                $obrazek = 'images/default.png';
             }
             ?>
             <div class="left">
@@ -53,26 +47,21 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                 <?php  
                 $existing_codes = array();
 
-                // Kontrola, zda byl formulář odeslán
                 if(!empty($_POST["send"])) {
-                    // Získání dat z formuláře
                     $subject = "Potvrzení rezervace lístků";
                     $email = $_POST["email"];
                     $name = $_POST["jméno"];
                     $count = $_POST["doprovod"];
 
-                    // Inicializace proměnných pro jméno a kategorii dítěte
                     $childrenInfo = "";
 
                     foreach ($_POST as $key => $value) {
                         if (strpos($key, 'jméno-hráč') !== false) {
-                            // Použití regulárního výrazu pro získání indexu
                             if (preg_match('/jméno-hráč(\d+)/', $key, $matches)) {
                                 $childIndex = $matches[1];
                                 $childName = $value;
                                 $categoryKey = 'kategorie' . $childIndex;
 
-                                // Zkontrolujte, zda existuje klíč pro kategorii dítěte
                                 if (isset($_POST[$categoryKey])) {
                                     $childAge = $_POST[$categoryKey];
 
@@ -82,7 +71,6 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                                         $childrenInfo .= "<li><strong>Jméno hráče:</strong> $childName, <strong>Kategorie:</strong> (není vyplněno)</li>";
                                     }
                                 } else {
-                                    // Zpracování, pokud klíč neexistuje, například nastavte výchozí hodnotu nebo vynechejte tento záznam
                                     $childrenInfo .= "<li><strong>Jméno hráče:</strong> $childName, <strong>Kategorie:</strong> (není vyplněno)</li>";
                                 }
                             }
@@ -91,22 +79,18 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
 
                     $escortPrice = $count * 150;
 
-                    // URL pro SheetDB API
                     $api_url = 'https://sheetdb.io/api/v1/r5qf0v0bpe8gu';
 
-                    // Vytvoř nový HTTP GET požadavek pro kontrolu duplicity e-mailu
-                    $check_url = $api_url . '/search?email=' . urlencode($email); // Vytvoř URL pro kontrolu e-mailu v databázi
+                    $check_url = $api_url . '/search?email=' . urlencode($email);
                     $check_ch = curl_init($check_url);
                     curl_setopt($check_ch, CURLOPT_RETURNTRANSFER, true);
                     $check_response = curl_exec($check_ch);
                     curl_close($check_ch);
 
-                    // Zkontroluj, zda e-mail již existuje v databázi
                     if ($check_response !== false) {
                         $existing_entries = json_decode($check_response, true);
                         $email_exists = false;
                         
-                        // Kontrola, zda existuje záznam s e-mailem a stavem rezervace 'platí'
                         foreach ($existing_entries as $entry) {
                             if ($entry['email'] === $email && $entry['rezervace'] === 'platí') {
                                 $email_exists = true;
@@ -115,16 +99,13 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                         }
 
                         if ($email_exists) {
-                            // Pokud e-mail již existuje s platnou rezervací, zobraz chybu
                             echo '<div class="alert-failed">Tento e-mail již byl použit pro rezervaci!</div>';
                         } else {
-                            // Pokud e-mail neexistuje s platnou rezervací, proved zbytek kódu
-                            // Generování náhodného devítimístného kódu
+
                             do {
                                 $code = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(9/strlen($x)) )),1,9);
-                            } while (in_array($code, $existing_codes)); // Opakuj generování kódu, pokud již existuje v seznamu
+                            } while (in_array($code, $existing_codes));
 
-                            // Data, která chceš zapsat do SheetDB
                             $data = array(
                                 'email' => $email,
                                 'jméno' => $name,
@@ -136,24 +117,19 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                                 'kategorie 2' => isset($_POST['kategorie2']) ? $_POST['kategorie2'] : '',
                                 'jméno hráče/trenéra 3' => isset($_POST['jméno-hráč3']) ? $_POST['jméno-hráč3'] : '',
                                 'kategorie 3' => isset($_POST['kategorie3']) ? $_POST['kategorie3'] : '',
-                                'kód rezervace' => $code, // Přidej generovaný kód do dat pro zápis do SheetDB
-                                'rezervace' => 'platí' // Nastav hodnotu sloupce rezervace na "platí"
+                                'kód rezervace' => $code,
+                                'rezervace' => 'platí'
                             );
 
-                            // Vytvoř nový HTTP POST požadavek pro zápis dat do SheetDB
                             $ch = curl_init($api_url);
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
                             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
                             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
-                            // Odešli požadavek a získaj odpověď
                             $response = curl_exec($ch);
 
-
-                                            // Zkontroluj, zda bylo zapsání úspěšné
                                             if ($response !== false) {
-                                                // Odešli e-mail
                                                 $toUserSubject = mb_encode_mimeheader($subject, "UTF-8", "Q");
                                                 $toUserHeaders = "From: no-reply\r\n";
                                                 $toUserHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
@@ -191,7 +167,6 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                                                         <li><strong>Email:</strong> $email</li>
                                                     </ul>";
                                                 
-                                                // Přidejte podmínku pro zobrazení nadpisu "Informace o hráčích" pouze pokud existují informace o hráčích
                                                 if (!empty($childrenInfo)) {
                                                     $toUserMessage .= "
                                                     <p>Informace o hráčích:</p>
@@ -222,11 +197,9 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                                                 echo '<div class="alert-failed">Chyba při odeslání emailu!</div>';
                                             }
 
-                                            // Uzavření curl spojení
                                             curl_close($ch);
                                         }
                                     } else {
-                                        // Pokud selže kontrola duplicity, zobraz chybu a ukonči skript
                                         echo '<div class="alert-failed">Chyba při odeslání emailu!</div>';
                                     }
                                 }
@@ -242,7 +215,6 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                         </div>
                     </div>
                     <div id="playersFields">
-                        <!-- Sem se přidají pole pro děti -->
                     </div>
                     <div class="counter counter-escort">
                         <div class="info-container">
@@ -295,13 +267,12 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                         input.name = inputName;
                         input.required = true;
                         input.placeholder = "Celé jméno hráče(ky)/trenéra(ky)*";
-                        input.classList.add("tickets-field"); // Přidá třídu pro přizpůsobení stylu v CSS
+                        input.classList.add("tickets-field");
                         
                         var select = document.createElement("select");
                         select.name = selectName;
                         select.required = true;
-                        
-                        // Vytvoření první možnosti s textem "Kategorie*" a nastavení jako vybrané a neaktivní
+
                         var defaultOption = document.createElement("option");
                         defaultOption.value = "";
                         defaultOption.text = "Kategorie*";
@@ -317,13 +288,13 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                             option.classList.add("option-class");
                             select.appendChild(option);
                         });
-                        select.classList.add("custom-select"); // Přidá třídu pro přizpůsobení stylu v CSS
+                        select.classList.add("custom-select");
 
                         var removeButton = document.createElement("button");
                         removeButton.type = "button";
                         removeButton.classList.add("remove-button");
                         var icon = document.createElement("i");
-                        icon.classList.add("fa-solid", "fa-xmark", "delete-icon"); // Třídy pro ikonu křížku z Font Awesome
+                        icon.classList.add("fa-solid", "fa-xmark", "delete-icon");
                         removeButton.appendChild(icon);
                         removeButton.addEventListener("click", function() {
                             playersFields.removeChild(input);
@@ -347,12 +318,11 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                 escortInput.addEventListener("input", function() {
                     var escortCount = parseInt(escortInput.value);
                     
-                    // Pokud escortCount není číslo, nastav hodnotu na 0
                     if (isNaN(escortCount)) {
                         escortCount = 0;
                     }
                     
-                    var price = escortCount * 150; // Cena je 150 Kč za kus
+                    var price = escortCount * 150;
                     var priceElement = document.getElementById("escortPrice");
                     priceElement.innerHTML = "<strong>Cena:</strong> " + price + " Kč";
                 });

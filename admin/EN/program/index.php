@@ -26,7 +26,6 @@ require_once '../../../skeleton/auth.php';
             }
         }
 
-        // Přepnutí režimu úprav
         function toggleEdit(button, rowId) {
             const row = document.querySelector(`#row-${rowId}`);
             const inputs = row.querySelectorAll('input, textarea');
@@ -58,58 +57,37 @@ require_once '../../../skeleton/auth.php';
 
 
     <?php
-    // Připojení k databázi
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "mywebsite";
+    include '../../../skeleton/db_connect.php';
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Chyba připojení: " . $conn->connect_error);
-    }
-
-    // Zpracování odstranění celého programu
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_all_programme'])) {
-        $delete_all_sql = "DELETE FROM programmeen";
-        if ($conn->query($delete_all_sql) === TRUE) {
-        } else {
-            echo "<p style='color: red;'>Chyba při mazání programu: " . $conn->error . "</p>";
-        }
+        $conn->exec("DELETE FROM programmeen");
     }
 
-    // Zpracování odstranění řádku
     if (isset($_POST['delete_row'])) {
-        $row_id = $_POST['row_id'];
-        $delete_sql = "DELETE FROM programmeen WHERE id = ?";
-        $stmt = $conn->prepare($delete_sql);
-        $stmt->bind_param("i", $row_id);
-        $stmt->execute();
+        $row_id = intval($_POST['row_id']);
+        $stmt = $conn->prepare("DELETE FROM programmeen WHERE id = :id");
+        $stmt->execute([':id' => $row_id]);
     }
 
-    // Zpracování úpravy řádku
     if (isset($_POST['edit_row'])) {
-        $row_id = $_POST['row_id'];
+        $row_id = intval($_POST['row_id']);
         $description = $_POST['description'];
-
-        $update_sql = "UPDATE programmeen SET description = ? WHERE id = ?";
-        $stmt = $conn->prepare($update_sql);
-        $stmt->bind_param("si", $description, $row_id);
-        $stmt->execute();
+        $stmt = $conn->prepare("UPDATE programmeen SET description = :description WHERE id = :id");
+        $stmt->execute([
+            ':description' => $description,
+            ':id' => $row_id
+        ]);
     }
 
-    // Získání programu z databáze
-    $sql = "SELECT id, description FROM programmeen";
-    $result = $conn->query($sql);
+    $stmt = $conn->query("SELECT id, description FROM programmeen");
+    $program = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($result->num_rows > 0) {
+    if (!empty($program)) {
         echo "<table>";
-        while ($row = $result->fetch_assoc()) {
+        foreach ($program as $row) {
             $row_id = $row['id'];
             echo "<tr id='row-$row_id'>";
             echo "<form method='POST' class='edit-form'>";
-            // Nahrazení inputu pro čas textovým inputem pro celý obsah
             echo "<td class='programmeDes'><textarea name='description' readonly>" . htmlspecialchars($row['description']) . "</textarea></td>";
             echo "<td class='action-buttons programmeButtons'>";
             echo "<button class='edit-btn' type='button' data-editing='false' onclick='toggleEdit(this, $row_id)'><i class='bx bx-edit-alt'></i></button>";
@@ -117,7 +95,6 @@ require_once '../../../skeleton/auth.php';
             echo "<input type='hidden' name='edit_row' value='1'>";
             echo "</form>";
 
-            // Formulář pro smazání řádku
             echo "<form method='POST' onsubmit='confirmDeleteRow(this); return false;'>";
             echo "<input type='hidden' name='row_id' value='$row_id'>";
             echo "<input type='hidden' name='delete_row' value='1'>";

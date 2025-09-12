@@ -1,21 +1,15 @@
 <?php
 include '../../skeleton/sendmail.php';
 
-// Připojení k databázi
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mywebsite";
+include '../../skeleton/db_connect.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Chyba připojení: " . $conn->connect_error);
+try {
+    $stmt = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $isReservationActive = $row ? $row['is_active'] : 0;
+} catch (PDOException $e) {
+    die("Chyba při načítání stavu rezervace: " . $e->getMessage());
 }
-
-// Získání stavu rezervace (1 = aktivní, 0 = neaktivní)
-$resStatus = $conn->query("SELECT is_active FROM reservation_status WHERE id = 1")->fetch_assoc();
-$isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -40,41 +34,29 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                     <form class="contact-form" method="post" autocomplete="off">
                     <?php
                     if (!empty($_POST["send"])) {
-                        // Získání dat z formuláře
                         $email = $_POST["email"];
                         $code = $_POST["code"];
 
-                        // URL pro SheetDB API pro hledání záznamu podle e-mailu
                         $email_search_url = 'https://sheetdb.io/api/v1/r5qf0v0bpe8gu/search?email=' . urlencode($email);
 
-                        // Získání odpovědi z API pro hledání e-mailu
                         $email_response = file_get_contents($email_search_url);
 
-                        // Zpracování odpovědi pro hledání e-mailu
                         $email_existing_entry = json_decode($email_response, true);
 
-                        // Procházení nalezených záznamů pro e-mail
                         if (!empty($email_existing_entry)) {
-                            // Předpokládáme, že existuje pouze jeden odpovídající záznam
                             $email_entry = $email_existing_entry[0];
 
-                            // Získání hodnoty sloupce "code" z nalezeného záznamu pro e-mail
                             $existing_code = $email_entry['kód rezervace'];
                             
-                            // Získání hodnoty sloupce "rezervace" z nalezeného záznamu pro e-mail
                             $existing_reservation = $email_entry['rezervace'];
 
-                            // Pokud kód neodpovídá zadanému kódu, zobraz chybu
                             if ($existing_code !== $code) {
                                 echo '<div class="alert-failed">Záznam s tímto kódem neexistuje.</div>';
                             } else {
-                                // Aktualizace stavu rezervace na "zrušeno" a e-mailu na "neplatný"
                                 $data = array('rezervace' => 'zrušeno', 'email' => $email . " - zrušen");
 
-                                // URL pro aktualizaci záznamu
                                 $update_url = 'https://sheetdb.io/api/v1/r5qf0v0bpe8gu/email/' . urlencode($email);
 
-                                // Konfigurace HTTP požadavku pro aktualizaci
                                 $options = array(
                                     'http' => array(
                                         'method'  => 'PUT',
@@ -83,13 +65,10 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                                     )
                                 );
 
-                                // Vytvoření kontextu pro HTTP požadavek
                                 $context  = stream_context_create($options);
 
-                                // Odeslání HTTP požadavku na aktualizaci záznamu
                                 $result = file_get_contents($update_url, false, $context);
 
-                                // Zpracování výsledku aktualizace
                                 if ($result !== false) {
                                     $toUserSubject = "Zrušení rezervace";
                                     $toUserSubject = mb_encode_mimeheader($toUserSubject, "UTF-8", "Q");
