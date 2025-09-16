@@ -26,11 +26,13 @@ try {
         <a href="../../en/reservation/cancel/" class="before pc-translate">CZ/EN</a>
         </nav>
     </header>
+    <div class="heading">
+        <h1>ZRUŠENÍ REZERVACE</h1>
+    </div>
     <main class="cancel-container">
             <?php if ($isReservationActive): ?>
             <div class="remove-box">
                 <div class="right cz-right">
-                    <h1>Zrušení rezervace</h1>
                     <form class="contact-form" method="post" autocomplete="off">
                     <?php
                     if (!empty($_POST["send"])) {

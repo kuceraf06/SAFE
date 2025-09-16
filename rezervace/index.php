@@ -26,8 +26,14 @@ try {
         <a href="../en/reservation/" class="before pc-translate">CZ/EN</a>
         </nav>
     </header>
+    <div class="heading">
+        <h1>REZERVACE VSTUPENEK</h1>
+    </div>
+    <?php if ($isReservationActive): ?>
+    <div class="tutorialHeader">
+        <i>Jak na to? Klikni <a href="#tutorial" class="gold">zde</a></i>
+    </div>
     <main class="contact-container mobile-contact">
-        <?php if ($isReservationActive): ?>
         <div class="contact-box">
             <?php
             try {
@@ -42,7 +48,6 @@ try {
                 <img src="../<?php echo $obrazek; ?>" alt="Úvodní obrázek">
             </div>
             <div class="right cz-right">
-                <h1>Rezervace vstupenek</h1>
                 <form class="contact-form" method="post" autocomplete="off">
                 <?php  
                 $existing_codes = array();
@@ -77,7 +82,7 @@ try {
                         }
                     }
 
-                    $escortPrice = $count * 150;
+                    $escortPrice = $count * 250;
 
                     $api_url = 'https://sheetdb.io/api/v1/r5qf0v0bpe8gu';
 
@@ -237,12 +242,32 @@ try {
                     <input type="submit" value="Odeslat" name="send" id="button" class="btn">
                 </form>
                 <p>Pokud chcete vaši rezervaci zrušit klikněte <a href="zruseni/">zde</a>.</p>
-                <?php else: ?>
-                    <div class="ticktes-end">Rezervace vstupenek na akci <span class="gold">SAFE</span> jsou již u konce. Termín na rezervace pro další ročník akce <span class="gold">SAFE</span> bude ještě upřesněn.</div>
-                <?php endif; ?>
             </div>
         </div>
     </main>
+    <div class="tutorial" id="tutorial">
+        <p><span>Varianta 1 - </span>jsem hráč/trenér bez doprovodu<br />
+        <p class="main-text">Zaklikni tlačítko "Přidat", vyber svou hlavní kategorii a vyplň celé jméno. Dole vyplň znovu své jméno a e-mailovou adresu. Odešli formulář.
+        </p></p>
+        <p class="main-text"><i>Například jsem hráč/trenér Josef Procházka z U15. Přidám jednoho hráče/trenéra, vyberu kategorii U15, zadám jméno Josef Procházka. Dole vyplním znovu své jméno a e-mailovou adresu a odešlu formulář.</i></p>
+        <br />
+        <p><span>Varianta 2 - </span>jsem hráč/trenér s doprovodem<br />
+        <p class="main-text">Zaklikni tlačítko "Přidat", vyber svou hlavní kategorii a vyplň celé jméno. V kolonce Doprovod vyplň počet požadovaných lístků (maximálně 5). Dole vyplň znovu své jméno a e-mailovou adresu. Odešli formulář.
+        </p></p>
+        <p class="main-text"><i>Například jsem hráč/trenér Petr Novotný z U13 a chci objednat lístek i pro rodiče. Přidám jednoho hráče/trenéra, vyberu kategorii U13, zadám jméno Petr Novotný. K doprovodu zadám počet lístků 1. Pokud chci přidat druhého rodiče, počet bude 2 apod. Déle vyplním znovu své jméno a e-mailovou adresu a odešlu formulář.</i></p>
+        <br />
+        <p><span>Varianta 3 - </span>jsem doprovod, objednávám pro sebe a hráče
+        <p class="main-text">Doprovodem nazýváme všechny, kdo nejsou hráči a trenéry. Můžeš tedy být například rodič, prarodič nebo jiný rodinný příslušník. 
+        </p></p>
+        <p>Zaklikni tlačítko "Přidat", vyber hlavní kategorii hráče/trenéra a vyplň jeho celé jméno. V kolonce Doprovod vyplň počet požadovaných lístků (maximálně 5). Dole vyplň své jméno a e-mailovou adresu. Odešli formulář.</p>
+        <p class="main-text"><i>Například jsem rodič Honzy Nováka z U9. Přidám jednoho hráče, vyberu kategorii U9, zadám jméno Jan Novák. K doprovodu zadám počet lístků 1. Pokud chci přidat druhého rodiče, počet bude 2. Pokud mám dvě hrající děti, přidám ještě jednoho hráče (postup stejný jako u prvního). Dále vyplním své jméno a e-mailovou adresu a odešlu formulář.</i></p>
+    </div>
+    <?php else: ?>
+    <main class="contact-container mobile-contact">
+        <div class="ticktes-end">Rezervace vstupenek na akci <span class="gold">SAFE</span> jsou již u konce. Termín na rezervace pro další ročník akce <span class="gold">SAFE</span> bude ještě upřesněn.</div>
+    </main>
+    <?php endif; ?>
+
     <?php include '../skeleton/footer.php'?>
     <?php include '../skeleton/toTop.php' ?>
     <script src="../javascript/main.js"></script>
@@ -322,7 +347,7 @@ try {
                         escortCount = 0;
                     }
                     
-                    var price = escortCount * 150;
+                    var price = escortCount * 250;
                     var priceElement = document.getElementById("escortPrice");
                     priceElement.innerHTML = "<strong>Cena:</strong> " + price + " Kč";
                 });

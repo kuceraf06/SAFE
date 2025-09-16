@@ -17,12 +17,14 @@ include '../skeleton/sendmail.php';
             </nav>
         </header>
         <main class="contact-container mobile-contact">
+            <div class="heading">
+                <h1>KONTAKTUJTE NÁS</h1>
+            </div>
             <div class="contact-box">
                 <div class="left">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1278.4678616738897!2d14.082344583382277!3d50.1436342810659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470bb7cd8c4a9c9f%3A0x7fdcecadc82d1c9f!2sMiners%20Kladno!5e0!3m2!1scs!2scz!4v1710027633321!5m2!1scs!2scz" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="right cz-right">
-                    <h1>Kontaktujte nás</h1>
                     <?php
                     if(isset($_POST["send"])) {
                         $subject = $_POST["subject"];
