@@ -20,19 +20,35 @@ require_once '../../../../../skeleton/auth.php';
             <?php
             include '../../../../../skeleton/db_connect.php';
 
-             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $descriptions = $_POST['description'] ?? [];
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (!empty($_POST['description']) && is_array($_POST['description'])) {
+                    $descriptions = $_POST['description'];
 
-                if (!empty($descriptions)) {
-                    $stmt = $conn->prepare("INSERT INTO programmeen (description) VALUES (:description)");
+                    try {
+                        $stmt = $conn->prepare("INSERT INTO programmeen (description) VALUES (:description)");
 
-                    foreach ($descriptions as $description) {
-                        $stmt->execute([':description' => $description]);
+                        $savedCount = 0;
+                        foreach ($descriptions as $description) {
+                            $description = trim($description);
+                            if ($description === '') continue;
+
+                            $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+                            $stmt->execute();
+                            $savedCount++;
+                        }
+
+                        if ($savedCount > 0) {
+                            echo "<p class='sucessMessage'>Program byl úspěšně uložen!</p>";
+                        } else {
+                            echo "<p class='errorMessage'>Nebyl zadán žádný text k uložení.</p>";
+                        }
+
+                    } catch (PDOException $e) {
+                        echo "<p style='color:red;'>Chyba při ukládání programu: " . htmlspecialchars($e->getMessage()) . "</p>";
                     }
 
-                    echo "<p class='sucessMessage'>Program byl úspěšně uložen!</p>";
                 } else {
-                    echo "<p style='color: red;'>Nebyly poskytnuty žádné popisy.</p>";
+                    echo "<p style='color:red;'>Nebyly odeslány žádné údaje k uložení.</p>";
                 }
             }
             ?>
