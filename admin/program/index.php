@@ -15,6 +15,8 @@ require_once '../../skeleton/auth.php';
         function confirmDeleteRow(form) {
             if (confirm("Opravdu chcete smazat tento řádek programu?")) {
                 form.submit();
+            } else {
+            return false;
             }
         }
 
