@@ -26,9 +26,12 @@ try {
             <a href="../../rezervace/" class="before pc-translate">CZ/EN</a>
             </nav>
         </header>
-        <main class="contact-container mobile-contact">
+        <div class="heading">
+            <h1>TICKETS RESERVATION</h1>
+        </div>
         <?php if ($isReservationActive): ?>
-        <div class="contact-box">
+        <main class="contact-container mobile-contact">
+            <div class="contact-box">
             <?php
             try {
                 $stmtImg = $conn->query("SELECT obrazek FROM invation WHERE id = 1");
@@ -42,7 +45,6 @@ try {
                 <img src="../../<?php echo $obrazek; ?>" alt="Úvodní obrázek">
             </div>
             <div class="right cz-right">
-                <h1>Tickets reservation</h1>
                 <form class="contact-form" method="post" autocomplete="off">
                 <?php  
                 $existing_codes = array();
@@ -77,7 +79,7 @@ try {
                         }
                     }
 
-                    $escortPrice = $count * 150;
+                    $escortPrice = $count * 250;
 
                     $api_url = 'https://sheetdb.io/api/v1/r5qf0v0bpe8gu';
 
@@ -234,14 +236,33 @@ try {
                     <input type="submit" value="Send" name="send" id="button" class="btn">
                 </form>
                 <p>To cancel your reservation, click <a href="cancel/">here</a>.</p>
-                <?php else: ?>
-                    <div class="ticktes-end">Ticket reservations for the <span class="gold">SAFE</span> event are now over. The reservation date for the next year's <span class="gold">SAFE</span> event will be announced later.</div>
-                <?php endif; ?>
             </div>
         </div>
     </main>
-            <?php include '../../skeleton/footer-en.php'?>
-            <?php include '../../skeleton/toTop.php' ?>
+    <div class="tutorial" id="tutorial">
+        <p><span>Option 1 - </span>I am a player/coach without an escort<br />
+        <p class="main-text">Click the "Add" button, select your main category, and fill in your full name. Fill in your name and email address again at the bottom. Submit the form.
+        </p></p>
+        <p class="main-text"><i>For example, I am a player/coach named Josef Procházka from U15. I will add one player/coach, select the U15 category, and enter the name Josef Procházka. At the bottom, I will fill in my name and email address again and submit the form.</i></p>
+        <br />
+        <p><span>Option 2 - </span>I am a player/coach with an accompanying person<br />
+        <p class="main-text">Click the "Add" button, select your main category, and fill in your full name. In the Accompanying Person field, fill in the number of tickets you want (maximum 5). Fill in your name and email address again at the bottom. Submit the form.
+        </p></p>
+        <p class="main-text"><i>For example, I am a player/coach named Petr Novotný from U13 and I want to order a ticket for my parents. I will add one player/coach, select the U13 category, and enter the name Petr Novotný. I will enter 1 ticket in the Accompanying Persons field. If I want to add a second parent, the number will be 2, etc. I will then fill in my name and email address again and submit the form.</i></p>
+        <br />
+        <p><span>Option 3 - </span> I am an accompanying person, ordering for myself and a player
+        <p class="main-text">An accompanying person is anyone who is not a player or coach. This could be a parent, grandparent, or other family member.
+        </p></p>
+        <p>Click the "Add" button, select the main category of the player/coach, and enter their full name. In the Accompanying Persons field, enter the number of tickets required (maximum 5). At the bottom, enter your name and email address. Submit the form.</p>
+        <p class="main-text"><i>For example, I am the parent of Jan Novák from U9. I will add one player, select the U9 category, and enter the name Jan Novák. I will enter 1 ticket in the Accompanying Persons field. If I want to add a second parent, the number will be 2. If I have two children playing, I will add another player (same procedure as for the first). Next, I will fill in my name and email address and submit the form.</i></p>
+    </div>
+    <?php else: ?>
+    <main class="contact-container mobile-contact">
+        <div class="ticktes-end">Ticket reservations for the <span class="gold">SAFE</span> event are now over. The reservation date for the next year's <span class="gold">SAFE</span> event will be announced later.</div>
+    </main>
+    <?php endif; ?>
+        <?php include '../../skeleton/footer-en.php'?>
+        <?php include '../../skeleton/toTop.php' ?>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 var addChildButton = document.getElementById("addChildButton");
@@ -318,7 +339,7 @@ try {
                         escortCount = 0;
                     }
                     
-                    var price = escortCount * 150;
+                    var price = escortCount * 250;
                     var priceElement = document.getElementById("escortPrice");
                     priceElement.innerHTML = "<strong>Price:</strong> " + price + " Kč";
                 });
