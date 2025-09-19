@@ -225,7 +225,7 @@ try {
                         <div class="info-container">
                             <i class='info-btn bx bx-info-circle'></i>
                             <div class="info-popup">
-                            Vzhledem ke kapacitě sálu je v první vlně objednávek uvolněna na každého hráče/trenéra 1 vstupenka pro doprovod (1+1). Ve formuláři uveďte celkový požadovaný počet vstupenek pro doprovod včetně těch požadovaných navíc.
+                            Doprovod je kdokoli mimo organizaci Miners (hráč, trenér, vedení).
                             </div>
                         </div>
                         <h2>DOPROVOD</h2>
