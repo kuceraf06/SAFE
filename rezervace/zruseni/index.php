@@ -101,7 +101,7 @@ try {
                                     <body>
                                         <h1>Rezervace vstupenek byla zrušena</h1><br>
                                         <p class='first-content'>Vaše rezervace s kódem <strong>\"$code\"</strong> a emailem <strong>\"$email\"</strong> byla právě zrušena.<br>
-                                        Pokud se nejednalo o vás, můžete rezervaci zpětně vytvořit <a href='https://safe.minerskladno.cz/tickets.php'>zde</a>.</p>
+                                        Pokud se nejednalo o vás, můžete rezervaci zpětně vytvořit <a href='https://safe.minerskladno.cz/rezerace/'>zde</a>.</p>
                                         <p>pozn. tato zpráva je automatická, prosím neodpovídejte na tento email.<br>
                                             V případě jakých koliv otázek či nejasností nás můžete kontaktovat 
                                             <a href='https://safe.minerskladno.cz/kontakt/'>zde</a> či na emailu <a href='mailto:safe@minerskladno.cz' target='_blank'>safe@minerskladno.cz</a></p>

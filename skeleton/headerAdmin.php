@@ -38,4 +38,16 @@
             window.location.href = "/admin/logout/";
         }
     }
+
+    // ZAVŘENÍ SIDEBARU PO KLIKU MIMO
+    document.addEventListener('click', function(event) {
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.querySelector('.menu-toggle');
+
+        // Pokud klik není na sidebar ani na tlačítko menu
+        if (sidebar && !sidebar.contains(event.target) && !toggleBtn.contains(event.target)) {
+            sidebar.classList.add('hidden');
+        }
+    });
 </script>
+

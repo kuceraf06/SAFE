@@ -1,7 +1,21 @@
 <?php
 require_once '../../../skeleton/auth.php';
-?>
+include '../../../skeleton/db_connect.php';
 
+if (!empty($_GET['delete_id'])) {
+    $delete_id = intval($_GET['delete_id']);
+    try {
+        $delete_sql = "DELETE FROM pasteventsen WHERE id = ?";
+        $stmt = $conn->prepare($delete_sql);
+        $stmt->execute([$delete_id]);
+
+        header("Location: ./");
+        exit;
+    } catch (PDOException $e) {
+        echo "<script>alert('Chyba při mazání události: " . addslashes($e->getMessage()) . "');</script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -36,17 +50,6 @@ require_once '../../../skeleton/auth.php';
         </thead>
         <tbody>
         <?php
-        include '../../../skeleton/db_connect.php';
-
-        if (!empty($_GET['delete_id'])) {
-            $delete_id = intval($_GET['delete_id']);
-            $delete_sql = "DELETE FROM pasteventsen WHERE id = ?";
-            $stmt = $conn->prepare($delete_sql);
-            $stmt->execute([$delete_id]);
-
-            header("Location: ./");
-            exit;
-        }
         try {
             $sql = "SELECT id, title, created_at FROM pasteventsen ORDER BY id DESC";
             $stmt = $conn->query($sql);
@@ -61,8 +64,8 @@ require_once '../../../skeleton/auth.php';
                     echo "<td>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</td>";
                     echo "<td>" . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . "</td>";
                     echo "<td class='action-buttons'>";
-                    echo "<a href='../upravit/?id=" . $row['id'] . "' class='edit-btn'><i class='bx bx-edit-alt'></i></a>";
-                    echo "<a href='#' class='delete-btn' onclick='confirmDelete(event, \"?delete_id=" . $row['id'] . "\")'><i class='bx bxs-tag-x'></i></a>";
+                    echo "<a href='../upravit/?id=" . (int)$row['id'] . "' class='edit-btn'><i class='bx bx-edit-alt'></i></a>";
+                    echo "<a href='#' class='delete-btn' onclick='confirmDelete(event, \"?delete_id=" . (int)$row['id'] . "\")'><i class='bx bxs-tag-x'></i></a>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -72,6 +75,8 @@ require_once '../../../skeleton/auth.php';
         } catch (PDOException $e) {
             echo "<tr><td colspan='3'>Chyba v dotazu: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
         }
+
+        $conn = null;
         ?>
         </tbody>
     </table>

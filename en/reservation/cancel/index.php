@@ -102,7 +102,7 @@ try {
                                 <body>
                                     <h1>The ticket reservation has been cancelled</h1><br>
                                     <p class='first-content'>Your reservation with the code <strong>\"$code\"</strong> and the email <strong>\"$email\"</strong> has just been cancelled.<br>
-                                    If it was not you, you can make a reservation retrospectively  <a href='https://safe.minerskladno.cz/tickets-en.php'>here</a>.</p>
+                                    If it was not you, you can make a reservation retrospectively  <a href='https://safe.minerskladno.cz/reservation/'>here</a>.</p>
                                     <p>Note: this message is automatic, please do not reply to this email.<br>
                                         If you have any questions or concerns, you can contact us  
                                         <a href='https://safe.minerskladno.cz/contact/'>here</a> or by email <a href='mailto:safe@minerskladno.cz' target='_blank'>safe@minerskladno.cz</a></p>

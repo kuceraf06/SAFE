@@ -180,7 +180,7 @@ try {
                                                     <p>The event takes place on November 9, 2024 from 6:00 p.m. in the Sokol cinema at <a target='_blank' href='https://www.google.com/maps/place//data=!4m2!3m1!1s0x470bb7da602a6c4b:0xe7204d94c85ab6b1?sa=X&ved=1t:8290&ictx=111'>T. G. Masaryka 2320, 272 01 Kladno 1</a></p>
                                                     <p>You can pick up and pay for tickets at the Family Day event on October 19, you will be informed about other possible dates by email.</p>
                                                     <p>We look forward to seeing you!</p>
-                                                    <p>Click <a target='_blank' href='https://safe.minerskladno.cz/cancel-en.php'>here</a> if you want to cancel the reservation</p>
+                                                    <p>Click <a target='_blank' href='https://safe.minerskladno.cz/cancel/'>here</a> if you want to cancel the reservation</p>
                                                     <p>note this message is automatic, please do not reply to this email.<br>
                                                         In case of any questions or ambiguities, you can contact us via our form
                                                         <a href='https://safe.minerskladno.cz/contact/'>here</a> or by email <a href='mailto:safe@minerskladno.cz' target='_blank'>safe@minerskladno.cz</a></p>

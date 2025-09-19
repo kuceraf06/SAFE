@@ -1,5 +1,4 @@
 <?php
-
 function sendEmail($toEmail, $subject, $content ) {
     $url = "https://api.sendgrid.com/v3/mail/send";
     $headers = [
@@ -31,7 +30,6 @@ function sendEmail($toEmail, $subject, $content ) {
     ];
 
     $ch = curl_init($url);
-
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -39,16 +37,8 @@ function sendEmail($toEmail, $subject, $content ) {
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    if (curl_errno($ch)) {
-        curl_close($ch);
-        return false;
-    }
-
     curl_close($ch);
-
 
     return $httpCode === 202;
 }
-
 ?>

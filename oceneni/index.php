@@ -23,7 +23,7 @@
                     <div class="dropdownYear">
                         <button class="dropdownButton">2024 <i class='bx bx-chevron-down'></i></button>
                         <div class="dropdownContentYear">
-                            <a href="#2024" class="activeYear">2024</a>
+                            <a href="#2024" class="actveYear">2024</a>
                             <a href="#2023">2023</a>
                             <a href="#2022">2022</a>
                         </div>

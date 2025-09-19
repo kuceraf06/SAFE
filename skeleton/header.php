@@ -11,7 +11,7 @@
             </div>
         </div>
         <header class="header mobile-header">
-            <a href="/"><img id="logo" src="/images/SAFE.png"></a>
+            <a href="/"><img id="logo" src="/images/logo-SAFE.png"></a>
 
             <input type="checkbox" id="check">
             <label for="check" class="icons">

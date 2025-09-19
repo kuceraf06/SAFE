@@ -1,0 +1,244 @@
+<head>
+    <title>SAFE | Rezervace Vstupenek</title>
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web about SAFE event">
+    <meta name="keywords" content="SAFE, Miners Kladno, HTML, CSS, Javascript, PHP">
+    <meta name="author" content="Filip Kučera">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/responsivity.css">
+</head>
+<body class="ticketspage-body">
+            <div class="topheader">
+            <div>
+                Miners Kladno <span class="special">Baseball & Softball</span>
+            </div>
+            <div class="header-icons">
+                <a href="https://softball.cz" target="_blank"><img src="/images/softballczech.png"/></a>
+                <a href="https://www.baseball.cz" target="_blank"><img src="/images/baseballczech.png"/></a>
+                <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><img src="/images/flickr.png"/></a>
+                <a href="https://www.facebook.com/minerskladno" target="_blank"><img src="/images/FB.png"/></a>
+                <a href="https://www.instagram.com/minerskladno/" target="_blank"><img src="/images/IG.png"/></a>
+            </div>
+        </div>
+        <header class="header mobile-header">
+            <a href="/"><img id="logo" src="../images/SAFE.png"></a>
+
+            <input type="checkbox" id="check">
+            <label for="check" class="icons">
+                <i class="bx bx-menu" id="menu-icon"></i>
+                <i class="bx bx-x" id="close-icon"></i>
+            </label>
+            <script>
+             document.addEventListener("DOMContentLoaded", function() {
+                var aboutToggle = document.getElementById('aboutButton');
+                var aboutIcon = document.querySelector('#aboutButton .toggleIcon');
+                var rosterToggle = document.getElementById('rosterButton');
+                var rosterIcon = document.querySelector('#rosterButton .toggleIcon');
+        
+                aboutToggle.addEventListener('click', function() {
+                    toggleDropdown(this, aboutIcon);
+                });
+        
+                rosterToggle?.addEventListener('click', function() {
+                    toggleDropdown(this, rosterIcon);
+                });
+
+                aboutIcon.addEventListener('click', function(event) {
+                    toggleDropdown(aboutToggle, aboutIcon);
+                    event.stopPropagation();
+                });
+
+                rosterIcon?.addEventListener('click', function(event) {
+                    toggleDropdown(rosterToggle, rosterIcon);
+                    event.stopPropagation();
+                });
+        
+                function toggleDropdown(toggle, icon) {
+                    var dropdownContent = toggle.nextElementSibling;
+                    var isOpen = dropdownContent.style.display === 'block';
+        
+                    closeAllDropdowns();
+
+                    dropdownContent.style.display = isOpen ? 'none' : 'block';
+
+                    if (icon) {
+                        icon.classList.toggle('rotate-90', !isOpen);
+                    }
+
+                    setTimeout(function() {
+                        icon.style.transition = 'transform 0.3s ease';
+                        dropdownContent.style.transition = isOpen ? 'opacity 0.3s' : 'opacity 0.5s';
+                    }, 50);
+                }
+        
+                function closeAllDropdowns() {
+                    var dropdownContents = document.querySelectorAll('.dropdown-content');
+                    dropdownContents.forEach(function(content) {
+                        content.style.display = 'none';
+                    });
+        
+                    [aboutIcon, rosterIcon].forEach(function(icon) {
+                        if (icon) {
+                            icon.classList.remove('rotate-90');
+                        }
+                    });
+                }
+                document.addEventListener('click', function(event) {
+                    if (!event.target.matches('.dropdown-toggle')) {
+                        closeAllDropdowns();
+                        [aboutIcon, rosterIcon].forEach(function(icon) {
+                            if (icon) {
+                                icon.classList.remove('rotate-90');
+                            }
+                        });
+                    }
+                });
+            });    
+        </script>
+    <div class="mobile-translate">
+        <a href="../en/reservation/">CZ/EN</a>
+    </div>
+    <nav class="navbar">
+            <div class="dropdown">
+                <div class="dropdown-toggle" id="aboutButton"><p class="dropdown-toggle" id="aboutButton">O AKCI <i class="fa-solid fa-angle-right toggleIcon"></i></p></div>
+                <div class="dropdown-content">
+                    <a href="/onas/" class="before first-child">O AKCI</a>
+                    <a href="/sponzori/" class="before-hover">SPONZOŘI</a>
+                    <a href="/rocniky/" class="before-half s">MINULÉ ROČNÍKY</a>
+                    <a href="/oceneni/" class="before-half">OCENĚNÍ HRÁČI</a>
+                </div>
+            </div>
+            <div class="mobile">
+                <p style="--i:0" class="mobile-header">O AKCI</p>
+                    <ul class="mobile-menu">
+                        <li><a href="/onas/" style="--i:1">O AKCI</a></li>
+                        <li><a href="/sponzori/" style="--i:2" id="sponsors-mobile-cz">SPONZOŘI</a></li>
+                        <li><a href="/rocniky/" style="--i:3" id="pastEvents-mobile-cz">MINULÉ ROČNÍKY</a></li>
+                        <li><a href="/oceneni/" style="--i:4" id="pastEvents-mobile-cz">OCENĚNÍ HRÁČI</a></li>
+                    </ul>
+            </div>
+            <a href="/program/" style="--i:4;" class="before">PROGRAM</a>
+            <a href="/rezervace/" style="--i:5;" class="before">VSTUPENKY</a>
+            <a href="https://www.minerskladno.cz" style="--i:6;" class="before" target="_blank">MINERS</a>
+            <a href="/kontakt/" style="--i:7;" class="before">KONTAKT</a>
+        <a href="../en/reservation/" class="before pc-translate">CZ/EN</a>
+        </nav>
+    </header>
+
+        <div class="heading">
+            <h1>REZERVACE VSTUPENEK</h1>
+        </div>
+        <div class="tutorialHeader">
+                <i>Jak na to? Klikni <a href="#tutorial" class="gold">zde</a></i>
+            </div>
+            <main class="contact-container mobile-contact">
+
+                    <div class="contact-box">
+                        <div class="left">
+                <img src="../images/invation.png" alt="Úvodní obrázek">
+            </div>
+            <div class="right cz-right">
+                <form class="contact-form" method="post" autocomplete="off">
+                    <div class="counter counter-player">
+                        <h2>HRÁČ/TRENÉR</h2>
+                        <div class="tickets">
+                            <button class="player-field" type="button" id="addChildButton">Přidat</button>
+                            <div class="price">
+                                <p><strong>Cena:</strong> Zdarma</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="playersFields">
+                    </div>
+                    <div class="counter counter-escort">
+                        <div class="info-container">
+                            <i class='info-btn bx bx-info-circle'></i>
+                            <div class="info-popup">
+                            Ve formuláři uveďte celkový požadovaný počet vstupenek pro doprovod.
+                            </div>
+                        </div>
+                        <h2>DOPROVOD</h2>
+                        <div class="tickets">
+                            <label for="escort">Počet lístků:</label>
+                            <input class="counter-field" type="number" id="escort" name="doprovod" min="0" max="5" placeholder="0" value="0" required>
+                        </div>
+                        <div class="price">
+                            <p id="escortPrice"><strong>Cena:</strong> 0 Kč</p>
+                        </div>
+                    </div>
+                    <input type="text" name="jméno" placeholder="Vaše celé jméno*" class="tickets-field" required>
+                    <input type="email" name="email" class="tickets-field last-field" placeholder="Vaše email adresa*" required>
+                    <input type="submit" value="Odeslat" name="send" id="button" class="btn">
+                </form>
+                <p>Pokud chcete vaši rezervaci zrušit klikněte <a href="zruseni/">zde</a>.</p>
+            </div>
+        </div>
+    </main>
+    <div class="tutorial" id="tutorial">
+        <p><span>Varianta 1 - </span>jsem hráč/trenér bez doprovod<br />
+        <p class="main-text">Zaklikni tlačítko "Přidat", vyber svou hlavní kategorii a vyplň celé jméno. Dole vyplň znovu své jméno a e-mailovou adresu. Odešli formulář.
+        </p></p><br />
+        <p><span>Varianta 2 - </span>jsem hráč/trenér s doprovodem<br />
+        <p class="main-text">Zaklikni tlačítko "Přidat", vyber svou hlavní kategorii a vyplň celé jméno. V kolonce Doprovod vyplň počet požadovaných lístků. V první vlně je počet omezen na 1 (jeden hráč/trenér + jeden doprovod). Dole vyplň znovu své jméno a e-mailovou adresu. Odešli formulář.
+        </p></p><br />
+        <p>Je možné rezervovat více lístků najednou. Čím více hráčů/trenérů přidáš, tím více lístků můžeš objednat pro doprovod. Pokud tedy zarezervuješ lístky pro tři hráče/trenéry, můžeš objednat tři lístky pro doprovod. Pod kolonkou Doprovod vyplníš jméno toho, na koho bude rezervace napsána (nejspíše tedy na Tebe).
+        </p><br />
+        <p><span>Varianta 3 - </span>jsem doprovod, objednávám pro sebe a hráče
+        <p class="main-text">Doprovodem nazýváme všechny, kdo nejsou hráči a trenéry. Můžeš tedy být například rodič, prarodič nebo jiný rodinný příslušník. 
+        </p></p>
+    </div>
+    <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-container">
+            <div class="row-footer">
+                <div class="footer-col">
+                <img src="..//images/SAFE-logo.png">
+                </div>
+                <div class="footer-col">
+                    <h4>DALŠÍ WEBY</h4>
+                    <ul>
+                        <li><a href="https://safe.minerskladno.cz" target="_blank">SAFE</a></li>
+                        <li><a href="https://barochova.wixsite.com/kiwileague" target="_blank">KIWI&nbsp;LEAGUE</a></li>
+                        <li><a href="https://merch.minerskladno.cz" target="_blank">E&minus;SHOP</a></li>
+                    </ul>
+                    </div>
+                <div class="footer-col">
+                    <h4>SLEDUJTE NÁS</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/minerskladno" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.flickr.com/photos/201375961@N07/" target="_blank"><i class='bx bxl-flickr'></i></a>
+                        <a href="https://www.instagram.com/minerskladno/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>KONTAKTUJTE NÁS</h4>
+                    <div class="contact-footer">
+                        <p><a href="mailto:safe@minerkladno.cz" target="_blank">safe@minerskladno.cz</a></p>
+                        <p>Miners Kladno, z.s.
+                            <br>
+                            U Trati 3489
+                            <br>
+                            272 01 Kladno 1
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <a href="mailto:safe@minerkladno.cz">Miners Kladno 2025 &copy; Všechna práva vyhrazena</a>
+    </div>
+</footer>

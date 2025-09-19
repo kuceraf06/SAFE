@@ -51,11 +51,11 @@ $isReservationActive = $resStatus ? $resStatus['is_active'] : 0;
                 </a>
             </div>
             <div class="secondBox">
-                <a href="/admin/program/pridat/" class="childBox">
+                <a href="/admin/termin/" class="childBox">
                     <i class='bx bx-plus'></i>
                     <p>Aktualizovat termín</p>
                 </a>
-                <a href="/admin/program/pridat/" class="childBox childBox-2">
+                <a href="/admin/pozvanka/" class="childBox childBox-2">
                     <i class='bx bx-plus'></i>
                     <p>Přidat novou pozvánku</p>
                 </a>

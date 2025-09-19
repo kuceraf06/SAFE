@@ -33,7 +33,7 @@ try {
                 <i>The date has not been set.</i>
             <?php endif; ?>
             <div class="buttons">
-                <a href="reservation/"><button type="button"><span></span>TIKCETS</button></a>
+                <a href="reservation/"><button type="button"><span></span>TICKETS</button></a>
                 <a href="about/"><button type="button"><span></span>ABOUT EVENT</button></a>
             </div>
         </main>
