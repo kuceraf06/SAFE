@@ -219,8 +219,7 @@ try {
                         <div class="info-container">
                             <i class='info-btn bx bx-info-circle'></i>
                             <div class="info-popup">
-                            Due to the capacity of the hall, 1 accompanying ticket (1+1) is released for each player/coach in the first wave of orders. In the form, indicate the total number of tickets requested for the accompaniment, including those requested in addition.
-                            </div>
+                            An accompanist is anyone outside the Miners organization (players, coaches, club management).
                         </div>
                         <h2>ACCOMPANIMENT</h2>
                         <div class="tickets">
