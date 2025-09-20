@@ -68,12 +68,12 @@ try {
                                     $childAge = $_POST[$categoryKey];
 
                                     if (!empty($childAge)) {
-                                        $childrenInfo .= "<li><strong>Players name:</strong> $childName, <strong>Category:</strong> $childAge</li>";
+                                        $childrenInfo .= "<li><strong>Players/Coaches name:</strong> $childName, <strong>Category:</strong> $childAge</li>";
                                     } else {
-                                        $childrenInfo .= "<li><strong>Players name:</strong> $childName, <strong>Category:</strong> (not filled)</li>";
+                                        $childrenInfo .= "<li><strong>Players/Coaches  name:</strong> $childName, <strong>Category:</strong> (not filled)</li>";
                                     }
                                 } else {
-                                    $childrenInfo .= "<li><strong>Players name:</strong> $childName, <strong>Category:</strong> (not filled)</li>";
+                                    $childrenInfo .= "<li><strong>Players/Coaches  name:</strong> $childName, <strong>Category:</strong> (not filled)</li>";
                                 }
                             }
                         }
@@ -162,7 +162,7 @@ try {
                                                     <p>Information:</p>
                                                     <ul>
                                                         <li><strong>Your reservation code is:</strong> $code</li>
-                                                        <li><strong>Number of entourage:</strong> $count</li>
+                                                        <li><strong>Number of accompaniment:</strong> $count</li>
                                                         <li><strong>Price for tickets:</strong> $escortPrice Kč</li>
                                                         <li><strong>Name:</strong> $name</li>
                                                         <li><strong>Email:</strong> $email</li>
@@ -170,15 +170,15 @@ try {
 
                                                     if (!empty($childrenInfo)) {
                                                         $toUserMessage .= "
-                                                        <p>Information about players:</p>
+                                                        <p>Information about players/coaches:</p>
                                                         <ul>
                                                             $childrenInfo
                                                         </ul>";
                                                     }
 
                                                     $toUserMessage .= "
-                                                    <p>The event takes place on November 9, 2024 from 6:00 p.m. in the Sokol cinema at <a target='_blank' href='https://www.google.com/maps/place//data=!4m2!3m1!1s0x470bb7da602a6c4b:0xe7204d94c85ab6b1?sa=X&ved=1t:8290&ictx=111'>T. G. Masaryka 2320, 272 01 Kladno 1</a></p>
-                                                    <p>You can pick up and pay for tickets at the Family Day event on October 19, you will be informed about other possible dates by email.</p>
+                                                    <p>The event takes place on November 8, 2024 from 6:00 p.m. in the Sokol cinema at <a target='_blank' href='https://www.google.com/maps/place//data=!4m2!3m1!1s0x470bb7da602a6c4b:0xe7204d94c85ab6b1?sa=X&ved=1t:8290&ictx=111'>T. G. Masaryka 2320, 272 01 Kladno 1</a></p>
+                                                    <p>You can pick up and pay for tickets at the Family Day event on October 12, you will be informed about other possible dates by email.</p>
                                                     <p>We look forward to seeing you!</p>
                                                     <p>Click <a target='_blank' href='https://safe.minerskladno.cz/cancel/'>here</a> if you want to cancel the reservation</p>
                                                     <p>note this message is automatic, please do not reply to this email.<br>
