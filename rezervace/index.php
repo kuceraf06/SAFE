@@ -71,12 +71,12 @@ try {
                                     $childAge = $_POST[$categoryKey];
 
                                     if (!empty($childAge)) {
-                                        $childrenInfo .= "<li><strong>Jméno hráče:</strong> $childName, <strong>Kategorie:</strong> $childAge</li>";
+                                        $childrenInfo .= "<li><strong>Jméno hráče/trenéra:</strong> $childName, <strong>Kategorie:</strong> $childAge</li>";
                                     } else {
-                                        $childrenInfo .= "<li><strong>Jméno hráče:</strong> $childName, <strong>Kategorie:</strong> (není vyplněno)</li>";
+                                        $childrenInfo .= "<li><strong>Jméno hráče/trenéra:</strong> $childName, <strong>Kategorie:</strong> (není vyplněno)</li>";
                                     }
                                 } else {
-                                    $childrenInfo .= "<li><strong>Jméno hráče:</strong> $childName, <strong>Kategorie:</strong> (není vyplněno)</li>";
+                                    $childrenInfo .= "<li><strong>Jméno hráče/trenéra:</strong> $childName, <strong>Kategorie:</strong> (není vyplněno)</li>";
                                 }
                             }
                         }
@@ -174,15 +174,15 @@ try {
                                                 
                                                 if (!empty($childrenInfo)) {
                                                     $toUserMessage .= "
-                                                    <p>Informace o hráčích:</p>
+                                                    <p>Informace o hráčích/trenérech:</p>
                                                     <ul>
                                                         $childrenInfo
                                                     </ul>";
                                                 }
                                                 
                                                 $toUserMessage .= "
-                                                    <p>Akce se koná 9. listopadu 2024 od 18:00 v kině Sokol na adrese <a target='_blank' href='https://www.google.com/maps/place//data=!4m2!3m1!1s0x470bb7da602a6c4b:0xe7204d94c85ab6b1?sa=X&ved=1t:8290&ictx=111'>T. G. Masaryka 2320, 272 01 Kladno 1</a></p>
-                                                    <p>Vstupenky si můžete vyzvednout a uhradit na akci Family Day 19. října, o dalších možných termínech budete informování emailem.</p>
+                                                    <p>Akce se koná 8. listopadu 2024 od 18:00 v kině Sokol na adrese <a target='_blank' href='https://www.google.com/maps/place//data=!4m2!3m1!1s0x470bb7da602a6c4b:0xe7204d94c85ab6b1?sa=X&ved=1t:8290&ictx=111'>T. G. Masaryka 2320, 272 01 Kladno 1</a></p>
+                                                    <p>Vstupenky si můžete vyzvednout a uhradit na akci Family Day 12. října, o dalších možných termínech budete informování emailem.</p>
                                                     <p>Těšíme se na Vás!</p>
                                                     <p>Pokud chcete rezervaci zrušit klikněte <a target='_blank' href='https://safe.minerskladno.cz/zruseni/'>zde</a></p>
                                                     <p>pozn. tato zpráva je automatická prosím neodpovídejte na tento email.<br>
