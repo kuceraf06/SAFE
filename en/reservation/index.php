@@ -296,7 +296,7 @@ try {
                         defaultOption.disabled = true;
                         select.appendChild(defaultOption);
 
-                        var ages = ["U5", "U7", "U9", "U11", "U11s", "U13", "U13s", "U15", "U16s", "U18", "U18s", "WOMEN", "WOMEN B", "MEN"];
+                        var ages = ["U5", "U6", "U7", "U9", "U11", "U11s", "U13", "U13s", "U15", "U16s","WOMEN", "MEN"];
                         ages.forEach(function(age) {
                             var option = document.createElement("option");
                             option.value = age;
