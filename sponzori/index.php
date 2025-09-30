@@ -23,38 +23,41 @@
                                 <a href="https://www.mestokladno.cz" target="_blank"><img src="../images/logo_kladno.jpg" class="image"></a>
                                 <a href="https://www.mestokladno.cz" target="_blank"><img src="../images/kladno_a.jpg"></a>
                             </li>
-                            <br id="break-1">
                             <li class="special-sponsors">
                                 <a href="https://kr-stredocesky.cz/web/urad" target="_blank"><img src="../images/logo_kraj.jpg" class="image"></a>
                                 <a href="https://kr-stredocesky.cz/web/urad" target="_blank"><img src="../images/kraj_a.jpg"></a>
                             </li>
-                            <br id="break-1">
                             <br>
                             <li>
                                 <a href="https://hemagel.cz/" target="_blank"><img src="../images/logo_hemagel.jpg" class="image"></a>
                                 <a href="https://hemagel.cz/" target="_blank"><img src="../images/hemagel_a.jpg"></a>
                             </li>
-                            <br id="break-1">
                             <li>
                                 <a href="https://hemacut.cz/" target="_blank"><img src="../images/logo_hemacut.jpg" class="image"></a>
                                 <a href="https://hemacut.cz/" target="_blank"><img src="../images/hemcut_a.jpg"></a>
                             </li>
-                            <br id="break-1">
-                            <br id="break-2">
+                            <li>    
+                                <a href="https://www.underarmour.cz" target="_blank"><img src="../images/logo_ua.png" class="image"></a>
+                                <a href="https://www.underarmour.cz" target="_blank"><img src="../images/ua_a.png"></a>
+                            </li>
                             <br id="none">
                             <li>
                                 <a href="https://kladenskymesic.cz" target="_blank"><img src="../images/logo_km.png" class="image"></a>
                                 <a href="https://kladenskymesic.cz" target="_blank"><img src="../images/kmB.png"></a>
                             </li>
-                            <br id="break-1">
                             <li>
                                 <a href="https://gardenservice.cz" target="_blank"><img src="../images/logo_aneta.jpg" class="image"></a>
                                 <a href="https://gardenservice.cz" target="_blank"><img src="../images/anetaB.jpg"></a>
                             </li>
-                            <br id="break-1">
+
                             <li>    
                                 <a href="https://www.cpzp.cz" target="_blank"><img src="../images/logo_cpzp.png" class="image"></a>
                                 <a href="https://www.cpzp.cz" target="_blank"><img src="../images/cpzpB.png"></a>
+                            </li>
+                            <br id="none">
+                            <li>    
+                                <a target="_blank"><img src="../images/logo_liveout.jpg" class="image"></a>
+                                <a target="_blank"><img src="../images/liveout_a.jpg"></a>
                             </li>
                         </ul>
                     </div>
