@@ -1,3 +1,14 @@
+<?php
+include '../../skeleton/db_connect.php';
+
+try {
+    $stmt = $conn->query("SELECT datum_cas FROM termin LIMIT 1");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $termin = $row ? $row['datum_cas'] : null;
+} catch (PDOException $e) {
+    die("Chyba při načítání termínu: " . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -28,7 +39,7 @@
                         <p>SAFE is the traditional gala evening of the <a href="https://www.minerskladno.cz" target="_blank" class="bolder">Miners Kladno</a> baseball and softball team, which closes the past competitive season and completes the year-long efforts of all the club's players and coaches.
                         At this end-of-season celebration, we will review annual performances, reward successes and congratulate the best. Traditionally, we invite special guests from among our founders and supporters of the club, such as representatives of the City of Kladno and the Central Bohemian Region, as well as baseball and softball representatives to this event.
                         SAFE is also a thank you to our <a href="../sponsors/" class="site-links">sponsors</a>, fans, parents and our entire Miners Family for their endless support without which we could not do what we do . 
-                        Enjoy this year's SAFE 24 as well, we look forward to seeing you.<br>
+                        Enjoy this year's SAFE as well, we look forward to seeing you.<br>
                         You can see more about SAFE <a href="#history" class="site-links">here</a>.<br>
                         You can find out when and where the event is taking place <a href="#location" class="site-links">below</a>.</p>
                     </div>
@@ -43,7 +54,11 @@
                     <div class="about-content">
                         <h2 id="location">When and where?</h2>
                         <p>SAFE is traditionally held after the end of the season.</p>
-                        <p><strong>WHEN:</strong> 9. listopadu od 18:00</p>
+                        <p><strong>WHEN:</strong><?php if ($termin): ?>
+                                                 <?php echo date("j. F Y H:i", strtotime($termin)); ?>
+                                                 <?php else: ?>
+                                                    <p>The date has not been set.</p>
+                                                 <?php endif; ?></p>
                         <p><strong>ADRESS:</strong> <a target="_blank" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x470bb7da602a6c4b:0xe7204d94c85ab6b1?sa=X&ved=1t:8290&ictx=111">T. G. Masaryka 2320, 272 01 Kladno 1</a></p>
                         <p><strong>HOW TO FIND US:</strong> Cinema Sokol is located in Kladno near nám. Svobody in the pedestrian zone. You can get to us by city 
                                                   or Prague buses (all buses stop on the square)</p>

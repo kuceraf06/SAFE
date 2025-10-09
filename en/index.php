@@ -28,7 +28,7 @@ try {
             <h1>THE BIGGEST EVENT OF THE YEAR!</h1>
             <br>
             <?php if ($termin): ?>
-                <i><?php echo date("j. F Y \o\d H:i", strtotime($termin)); ?></i>
+                <i><?php echo date("j. F Y H:i", strtotime($termin)); ?></i>
             <?php else: ?>
                 <i>The date has not been set.</i>
             <?php endif; ?>
