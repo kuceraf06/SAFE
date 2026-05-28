@@ -1,0 +1,17 @@
+# Databáze a runtime data (na serveru zůstávají lokálně)
+admin/sql/*.sqlite
+admin/sql/*.sqlite-journal
+admin/sql/*.sqlite-wal
+admin/sql/*.sqlite-shm
+
+# Logy / dočasné
+*.log
+
+# API klíče (na NAS jen lokální secrets.php)
+skeleton/secrets.php
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

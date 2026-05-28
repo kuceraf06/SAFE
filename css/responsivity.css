@@ -1,0 +1,856 @@
+@media (max-width: 1550px) {
+    .contact-box {
+        width: 930px;
+    }
+
+    .remove-box {
+        width: 930px;
+    }
+
+    .contactMethod {
+        margin-top: 50px;
+        width: 930px;
+        display: flex;
+        padding: 50px;
+    }
+
+    .para {
+        font-size: 11.4px;
+    }
+
+    .contact-text {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 1540px) {
+    .firstBox {
+        display: block;
+    }
+    
+    .secondBox {
+        display: block;
+    }
+
+    .childBox-2 {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 1430px) {
+    .form-row {
+        margin: 0;
+    }
+}
+
+@media (max-width: 1407px) {
+    .gallery img {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 1234px) {
+    .navbar a,
+    .navbar p, .programmeContent, .heading p, .pastEvents-content p, .pastEvents-content ul, .onePlayer p{
+        font-size: .9rem !important;
+    }
+
+    .heading h1, .partner-wrap h1  {
+        font-size: 36px !important;
+    }
+
+    .pastEvents-content h2 {
+        font-size: 24px !important;
+    }
+
+    .awaredHeading h2 {
+        font-size: 4rem;
+    }
+
+    .about-content h3, .onePlayer h3, .programmeLabel {
+        font-size: 1.1rem !important;
+    }
+
+     .ticktes-end {
+        font-size: 1rem;
+        width: 90%;
+     }
+
+    #logo {
+        width: 130px;
+        margin-right: 1rem;
+        margin-left: 35px;
+    }
+}
+
+@media (max-width: 1169px) {
+    .gallery img {
+        margin-left: 0px;
+        max-width: 190px;
+    }
+
+    .content .addBox {
+        display: block;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .childBox-2 {
+        margin-top: 0px;
+    }
+
+    .content .childBox {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 1196px) {
+    .footer-col .social-links a:not(:first-child, :last-child, :nth-child(2)) {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 1167px) {
+    .form-content {
+        display: block;
+    }
+
+    .form-row input[type="text"],
+    .form-row textarea,
+    .form-row input[type="file"] {
+        max-width: 75%;
+    }
+
+    .form-row textarea {
+        margin-left: 13px;
+    }
+
+    .awardedFiles label {
+        margin-right: 50px;
+    }
+
+}
+
+@media (max-width: 1098px) {
+    .footer-col ul li a:hover{
+        padding-left: 0px;    
+    }
+
+    .footer-col .social-links a:hover{
+        color: black;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .buttons button:hover span{
+        width: 0;
+    }
+    
+    .buttons button:hover {
+        border: 2px solid rgb(194, 155, 49);
+    }
+
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+
+    .footer-col img {
+        margin-left: -40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+
+    .main {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1) 40%,rgb(0,0,0) 70%);
+    }
+
+    #break {
+        display: block;
+    }
+
+    .gallery img {
+        max-width: 250px;
+        margin-left: 50px;
+    } 
+
+    .onePlayer {
+        width: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .mobile-translate {
+        display: block;
+        margin-left: auto;   
+     }
+
+    .header-icons a img:hover {
+        color: transparent;
+        background-color: transparent;
+    }
+
+    .mobile-translate a {
+        position: relative;
+        font-family: "Titan One", sans-serif;
+        font-size: 1.15rem;
+        color: rgb(194, 155, 49) !important;
+        text-decoration: none;
+        margin-right: 4rem;
+     }
+
+    .dropdown {
+        display: none;
+    }
+
+    .pc-translate {
+        visibility: hidden;
+    }
+
+    .mobile-translate a{
+        font-size: .9rem;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .mobile-header.hide {
+        transform: translateY(-110%);
+    }
+
+    .header {
+        top: 25px;
+    }
+
+    #menu-icon {
+        font-size: 2.5rem;
+    }
+
+    .mobile-menu li a{
+        text-shadow: none;
+        list-style: none;
+        font-weight: 200;
+        color: rgb(205, 204, 204);
+        font-family: "Inter", sans-serif !important;
+        margin-top: -0.5rem;
+        font-size: .9rem;
+        text-align: center;
+    }
+
+    .mobile p:hover {
+        background-color: black;
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+    }
+
+    .mobile-menu li{
+        list-style: none;
+    }
+
+    .header::before {
+        background-color: black;
+    }
+
+    .icons {
+        display: inline-flex;
+    }
+
+    #check:checked~.icons #menu-icon {
+        display: none;
+    }
+
+    .icons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        display: block;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: black;
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .7);
+        overflow: hidden;
+        transition: .5s ease;
+    }
+
+    #check:checked~.navbar {
+        height: 23rem;
+    }
+
+    .navbar a{
+        display: block;
+        font-size: 1.1rem;
+        padding: 0px;
+        border-radius: 0px;
+        margin: 1.5rem 0;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .2s ease;
+    }
+
+    .navbar p{
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.5rem 0;
+        padding: 0px;
+        border-radius: 0px;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .2s ease;
+    }
+
+    .navbar i{
+        display: none;
+    }
+
+    #check:checked~.navbar a{
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+    #check:checked~.navbar p{
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+    .navbar a::before {
+        display: none;
+    }
+}
+
+@media (max-width: 943px) {
+    .para {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 935px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar.hidden {
+        transform: translateX(-100%);
+    }
+
+    .close-btn {
+        display: block;
+    }
+
+    .content {
+        margin-left: 0px;
+        margin-top: 50px;
+    }
+
+    .childBox:hover {
+        transform: scale(1);
+        box-shadow: 0 0px 0px rgb(0, 0, 0);
+    }
+}
+
+
+@media (max-width: 872px) {
+    .contactpage-body {
+        background-color: #f2f2f2;
+        width: 100%;
+        margin-top: 2vh;
+    }
+
+    .ticketspage-body {
+        background-color: #f2f2f2;
+        width: 100%;
+        margin-top: 2vh;
+    }
+    
+    .contact-box {
+        grid-template-columns: 1fr;
+    }
+
+    .left iframe {
+        padding: 0;
+    }
+
+    .left img {
+        padding: 15px 40px;
+    }
+
+    .contactMethod {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .para {
+        font-size: 9px;
+    }
+    
+    .ticktes-end  {
+        margin-top: 0px !important;
+    }
+}
+
+@media (max-width: 860px) {
+    .social-links {
+        width: 25%;
+        margin-top: -10px;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+
+    .onePlayer {
+        display: block;
+    }
+}
+
+@media (max-width: 636px) {
+    #break-2 {
+        display: none;
+    }
+
+    #break-1 {
+        display: block;
+    }
+
+    .footer-col .social-links a:not(:first-child, :last-child, :nth-child(2)) {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 834px) {
+    #break-2 {
+        display: block;
+    }
+
+    #none {
+        display: none;
+    }
+}
+
+@media (max-width: 815px) {
+    .pastEvents-content ul li{
+        line-height: normal;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 826px) {
+    .contactMethod {
+        display: grid;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .para {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 796px) {
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 815px) {
+    .heading {
+        padding: 0px 20px;
+    }
+
+    .heading h1 {
+        font-size: 36px;
+    }
+
+    .heading p {
+        font-size: 17px;
+        margin-bottom: 0px;
+    }
+
+    .container {
+        padding: 0px;
+    }
+
+    .aboutpage {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .about-image {
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .about-content p {
+        padding: 0px;
+        font-size: 16px;
+    }
+
+    .button-about {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {   
+    .left iframe {
+        padding: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .gallery img {
+        max-width: 250px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 671px) {
+    .main {
+        margin-top: 62vh;
+    }
+
+    .gallery img {
+        max-width: 300px;
+        margin-top: 50px;
+    }
+
+    .programmeDes textarea {
+        width: 300px;
+    }
+
+    .modal {
+        height: 400px;
+    }
+     
+    .modal-content {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .modal-image img {
+        margin-left: 70px;
+    }
+
+    .awardedPlayers {
+        display: block;
+    }
+
+    .awaredHeading {
+        display: block;
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 619px) {
+    .topheader div {
+        font-size: .9rem;
+    }
+
+    #logo {
+        margin-left: 25px;
+        margin-right: 0rem;
+    }
+}
+
+@media (max-width: 595px) {
+    .footer {
+        padding: 5% 0 0 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .adminMain {
+        margin-top: .5rem;
+        width: 90%;
+    }
+
+    .topheader div {
+        font-size: .8rem;
+    }
+}
+
+@media (max-width: 530px) {
+    .top-left .miners-logo {
+        font-size: .6rem;
+    }
+
+    .top-right a {
+        font-size: .8rem;
+        margin-left: 0;
+    }
+    
+    .top-right img {
+        width: 19px;
+        border-radius: 3px;
+    }
+
+    .second-image {
+        width: 14.5px !important;
+    }
+
+    #programme-break {
+        display: inline;
+    }
+
+    .topheader div {
+        font-size: 1rem;
+    }
+
+    .special {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .social-links {
+        width: 40%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+
+    .topheader .header-icons a:first-child img {
+        width: 39.33px;
+        height: 20px;
+    }
+
+    .topheader .header-icons a:nth-child(2) img {
+        width: 22px;
+        height: 20px;
+    }
+
+    .topheader .header-icons a:nth-child(3) img {
+        width: 20.67px;
+        height: 20px;
+    }
+
+    .topheader .header-icons a:nth-child(4) img, .topheader .header-icons a:nth-child(5) img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .topheader div {
+        font-size: .9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery img {
+        max-width: 250px;
+    }
+
+    .programmeDes textarea {
+        width: 200px;
+    }
+}
+
+@media (max-width: 450px) {
+    .footer-col {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .footer-col:nth-child(2) {
+        width: 100% !important;
+    }
+
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+
+    .footer-col:last-child {
+        margin-top: 15px;
+    }
+
+    .footer-col:first-child {
+        text-align: center;
+    }
+
+    .footer-col img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 444px){
+    .main {
+        margin-top: 50vh;
+    }
+
+    .buttons button {
+        margin: 10px !important;
+    }
+
+    .arrow-up {
+        right: 10px;
+    }
+}
+
+@media (max-width: 430px) {
+    .gallery img{
+        max-width: 300px;
+    }
+
+    .content .addBox {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 427px) {
+    #second-programme-break {
+        display: inline;
+    }
+
+    .modal-buttons button, .modal-buttons a, .modal-text p{
+       font-size: .8em;
+    }
+
+    .modal-image img {
+        width: 150px;
+        margin-left: 60px;
+    }
+
+    .modal {
+        height: 300px;
+    }
+}
+
+
+@media (max-width: 418px) {
+    #btn-break {
+        display: block;
+    }
+
+    .second-btn {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 400px) {
+    .footer-col {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .social-links {
+        width: 100%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 392px) {
+    .events-table .action-buttons a {
+        margin: 5px;
+    }
+}
+
+@media (max-width: 386px) {
+    .main {
+        margin-top: 52.7vh;
+    }
+    .main h1 {
+        font-size: 32px;
+    }
+
+    .main i{
+        font-size: 17px;
+    }
+
+    .sub-heading {
+        font-size: 17px;
+    }
+
+    .contactIcon {
+        font-size: 25px;
+    }
+
+    .para {
+        font-size: 10px;
+    }
+
+    .different {
+        padding-left: 80px;
+    }
+
+    .different-2 {
+        padding-left: 90px;
+    }
+
+    #alertWarning {
+        display: block;
+    }
+
+    .dateTime {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .programmeButtons {
+        display: block;
+    }
+
+    .programmeButtons button {
+        margin-top: 5px;
+    }
+
+    .programmeButtons button:not(:first-child) {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 345px) {
+    #second-programme-break {
+        display: none;
+    }
+}
