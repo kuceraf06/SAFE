@@ -1,0 +1,124 @@
+/* =====================================================================
+   SAFE – stránka MINULÉ ROČNÍKY (events)
+   ===================================================================== */
+
+/*=======================================================================================PASTEVENTS====================================================================================*/
+
+.pastEvetnts-page {
+    margin-bottom: 50px;
+}
+
+.pastEvents-container{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.eventspage{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.event-main {
+    background-color: #fff;
+    box-shadow: 1rem 1rem 30px 10px rgba(0, 0, 0, .4);
+    padding: 20px;
+}
+
+.pastEvents-content {
+    flex: 1;
+}
+
+.pastEvents-content h2, .pastEvents-content h1{
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.pastEvents-content h1 {
+    font-size: 36px;
+}
+
+.pastEvents-content h2 {
+    font-size: 30px;
+}
+
+.pastEvents-content ul {
+    line-height: 2.5rem;
+    font-size: 1rem;
+    list-style: none;
+    color: #333;
+}
+
+.pastEvents-content p {
+    font-size: 1rem;
+    margin: 1rem 0px;
+    color: #333;
+}
+
+.gallery img {
+    /* na širokém displeji 4 vedle sebe; na užších se počet sám sníží,
+       protože obrázky mají pevné rozumné rozměry a flex je zalomí pod sebe */
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    object-fit: cover;
+    transition: .5s ease;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    overflow: hidden;
+    margin: 30px 0;
+}
+
+/* center element uvnitř galerie nesmí rozbít flex layout */
+.gallery center {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* (staré .gallery pravidlo nahrazeno flexbox verzí výše) */
+
+.second-content {
+    margin: 100px 0px;
+}
+
+.pastEvents-page hr {
+    margin: 100px auto;
+    width: 78%;
+    max-width: 1400px;
+    height: 3px;
+    background-color: #333;
+    border: none;
+}
+
+.pastEvents-page {
+    /* stejná šířka jako stránka Ocenění (.awardedMain) – jednotný okraj */
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+#break {
+    display: none;
+}
+
+
+/* ---------------------------------------------------------------------
+   Na mobilu jdou fotky z galerie VŠECHNY pod sebe (jedna na řádek),
+   velké a přehledné – jako na původním webu.
+   --------------------------------------------------------------------- */
+@media (max-width: 600px) {
+    .gallery img {
+        max-width: 100%;
+    }
+}

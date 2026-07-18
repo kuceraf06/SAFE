@@ -1,0 +1,33 @@
+/* =====================================================================
+   SAFE – stránka 404 (nenalezeno)
+   Tlačítko zpět jako na SCM, jen se zlatou barvou.
+   ===================================================================== */
+
+.error-body {
+    background-color: #F8F4F4;
+}
+
+.error-page {
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+/* Zlaté tlačítko zpět na úvod */
+.back-home {
+    display: inline-block;
+    font-weight: 500;
+    padding: 10px 20px;
+    font-size: 19px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    margin-top: 30px;
+    transition: .3s ease;
+    background-color: #C29B31;
+    border: 2px solid #C29B31;
+}
+
+.back-home:hover {
+    background-color: #A07E20;
+    border-color: #A07E20;
+}

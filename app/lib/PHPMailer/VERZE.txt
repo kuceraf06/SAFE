@@ -1,0 +1,4 @@
+PHPMailer 6.12.0
+Staženo z https://github.com/PHPMailer/PHPMailer (licence LGPL-2.1, viz LICENSE).
+Nainstalováno ručně (bez Composeru) - stačí tyto tři třídy:
+  PHPMailer.php, SMTP.php, Exception.php

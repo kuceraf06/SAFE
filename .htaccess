@@ -1,0 +1,17 @@
+# Zákaz výpisu adresářů (jinak by přímý přístup na cestu vracel 403/listing)
+Options -Indexes
+
+RewriteEngine On
+
+# Statické soubory (css, js, obrázky) se servírují přímo
+RewriteRule ^public/ - [L]
+
+# Zákaz přímého přístupu do app/ (pohledy jdou jen přes index.php)
+RewriteRule ^app/ - [F]
+
+# Vše ostatní (i cesty s lomítkem jako reservation/cancel) jde přes
+# front controller. Podmínky zajistí, že existující soubory a složky
+# se neroutují, ale neexistující cesty ano.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]

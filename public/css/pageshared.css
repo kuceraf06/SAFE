@@ -1,0 +1,108 @@
+/* =====================================================================
+   SAFE – sdílené styly podstránek (šířka, podnadpisy)
+   ===================================================================== */
+
+/* =========================================================================
+   SAFE - sjednocení s SCM (šířka stránek, podnadpisy, vylepšení)
+   ========================================================================= */
+
+/* omezení šířky obsahu na 75 % (jako SCM), na menších displejích 92 % */
+.page-width {
+    width: 75%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (max-width: 1200px) {
+    .page-width {
+        width: 92%;
+    }
+}
+
+/* podnadpis v hlavičce sekce - NENÍ celý velkými písmeny (jemnější) */
+.heading .subheading {
+    text-transform: none;
+    font-weight: 400;
+}
+
+/* ---------------------------------------------------------------------
+   Nadpis podstránky se zlatým podtržením.
+   Musí být tady (ne v about.css), protože ho používají VŠECHNY podstránky.
+   margin-top drží obsah pod fixed hlavičkou.
+   --------------------------------------------------------------------- */
+.heading {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.heading h1 {
+    font-size: 50px;
+    color: #000;
+    margin-bottom: 25px;
+    position: relative;
+    margin-top: 100px;
+}
+
+.heading h1::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    display: block;
+    margin: 0px auto;
+    background-color: rgb(194, 155, 49);
+}
+
+.heading p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 35px;
+}
+
+/* ---------------------------------------------------------------------
+   Hlášky po odeslání formuláře (úspěch / chyba).
+   Musí být tady, ne v jednotlivých stránkách – jinak se barvy rozejdou.
+   Používá je rezervace, zrušení rezervace i kontakt.
+   Vzhled převzat z rezervace (a ta ho má z původního webu).
+   --------------------------------------------------------------------- */
+.alert,
+.alert-success,
+.alert-failed,
+.alert-email,
+.alert-phone {
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: rgb(20, 50, 20);
+    color: green;
+}
+
+.alert-failed,
+.alert-email,
+.alert-phone {
+    background-color: rgba(255, 0, 0, 0.3);
+    color: red;
+}
+
+/* odkaz uvnitř hlášky (např. "vytvořit novou rezervaci") */
+.alert-success a,
+.alert-failed a {
+    color: #C29B31;
+    text-decoration: underline;
+}
+
+.alert-success a:hover,
+.alert-failed a:hover {
+    color: #A07E20;
+}

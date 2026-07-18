@@ -1,0 +1,98 @@
+/* =====================================================================
+   SAFE – stránka SPONZOŘI
+   ===================================================================== */
+
+/*=======================================================================================PARTNERSPAGE====================================================================================*/
+.partner-wrap {
+    width: 100%;
+    place-items: center;
+    display: grid;
+    height: auto;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.partner-wrap h1 {
+    font-size: 50px;
+    color: #000;
+    margin-bottom: 50px;
+    position: relative;
+    margin-top: 150px;
+}
+
+.partner-wrap h1::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    display: block;
+    margin: 0px auto;
+    background-color: rgb(194, 155, 49);
+}
+
+.partner-in {
+    width: 100%;
+    height: auto;
+}
+
+.partner-in h2 {
+    margin-top: 50px;
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.partner-in ul {
+    padding: 0;
+    margin: 0;
+}
+
+.partner-in ul li {
+    list-style: none;
+    display: inline-block;
+    width: 250px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    margin: 25px 10px;
+    box-shadow: 10px 10px 10px -7px #555;
+    transition: .5s;
+}
+
+.partner-in ul .special-sponsors {
+    width: 287.5px;
+    height: 115px;
+}
+
+.partner-in ul li img {
+    width: 100%;
+    height: 100%;
+}
+
+.partner-in ul li img:nth-child(1) {
+    transform: translateY(0);
+    transition: .5s;
+}
+
+.partner-in ul li img:nth-child(2) {
+    transform: translateY(0);
+    transition: .5s;
+}
+
+.partner-in ul li:hover img:nth-child(1) {
+    transform: translateY(-100%);
+    transition: .5s;
+}
+
+.partner-in ul li:hover img:nth-child(2) {
+    transform: translateY(-100%);
+    transition: .5s;
+}
+
+#break-1 {
+    display: none;
+}
+
+#break-2 {
+    display: none;
+}
+

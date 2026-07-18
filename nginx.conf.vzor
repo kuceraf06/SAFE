@@ -1,0 +1,93 @@
+# =============================================================================
+#  NGINX konfigurace pro web SAFE
+# =============================================================================
+#
+#  PROČ TENHLE SOUBOR EXISTUJE:
+#  Server běží na nginxu. nginx (na rozdíl od Apache) neumí .htaccess, takže
+#  bez téhle konfigurace by:
+#    • všechny stránky kromě úvodní házely 404 (nefungoval by přepis adres),
+#    • odkazy v e-mailech (např. /reservation/cancel) by nefungovaly,
+#    • databázi by šlo stáhnout z internetu.
+#
+#  ------------------------------------------------------------------------
+#  JAK TO POUŽÍT (stačí jednou):
+#  ------------------------------------------------------------------------
+#  1) Zjisti cestu k PHP-FPM socketu na serveru:
+#         ls /run/php/
+#     Vypíše něco jako "php8.1-fpm.sock" nebo "php8.0-fpm.sock".
+#     Tuhle hodnotu dosaď níže do řádku "fastcgi_pass" (jsou tam <<< UPRAVIT).
+#
+#  2) Dosaď cestu, kam je web nahraný, do řádku "root" (taky <<< UPRAVIT).
+#
+#  3) Zkopíruj celý blok "server { ... }" do konfigurace nginx pro tuhle doménu.
+#     Na běžném nginxu je to soubor v /etc/nginx/sites-available/ (a přes
+#     symlink zapnutý v /etc/nginx/sites-enabled/). Na Synology Web Station:
+#     Web Service Portal → u portálu zvol Nginx a vlož obsah.
+#
+#  4) Ověř a restartuj:
+#         sudo nginx -t          (zkontroluje syntaxi)
+#         sudo systemctl reload nginx
+#
+#  Hotovo. Adresy budou hezké (/program, /reservation/cancel) a maily fungují.
+# =============================================================================
+
+server {
+    listen 80;
+    server_name safe.minerskladno.cz;
+
+    # <<< UPRAVIT: absolutní cesta ke složce, kam je web nahraný
+    #     (ta složka, ve které je index.php)
+    root /var/www/safe;
+
+    index index.php;
+
+    client_max_body_size 10M;              # kvůli nahrávání fotek v administraci
+
+    # =========================================================================
+    #  1) ZÁKAZY – MUSÍ být první, ještě před blokem pro PHP.
+    #     (nginx bere první "location", který sedí; kdyby byl dřív PHP blok,
+    #      zákazy by se neuplatnily.)
+    # =========================================================================
+
+    # Nastavení, databáze, knihovny serveru – ven se nesmí dostat nic z toho.
+    location ~ ^/(config|storage|app)/ {
+        deny all;
+        return 404;
+    }
+
+    location ~ ^/admin/lib/ {
+        deny all;
+        return 404;
+    }
+
+    # Ve složce nahraných souborů se nikdy nesmí spustit skript (obrana proti RCE).
+    location ~ ^/public/images/uploads/.*\.(php|phtml|php[0-9]|phps|phar|cgi|pl|py|sh)$ {
+        deny all;
+        return 404;
+    }
+
+    # Skryté soubory (.git, .htaccess, .env …).
+    location ~ /\. {
+        deny all;
+        return 404;
+    }
+
+    # =========================================================================
+    #  2) SPOUŠTĚNÍ PHP
+    # =========================================================================
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+
+        # <<< UPRAVIT: cesta k PHP-FPM socketu (viz krok 1 nahoře).
+        #     Zjistíš přes:  ls /run/php/
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    }
+
+    # =========================================================================
+    #  3) PŘEPIS ADRES – vše ostatní posíláme na index.php.
+    #     Díky tomu fungují hezké adresy i odkazy z e-mailů.
+    # =========================================================================
+    location / {
+        try_files $uri $uri/ /index.php?route=$uri&$args;
+    }
+}

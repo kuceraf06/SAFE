@@ -1,0 +1,527 @@
+/* =====================================================================
+   SAFE – stránka VSTUPENKY + ZRUŠENÍ REZERVACE
+   ===================================================================== */
+
+/* -- sdílené formulářové styly (contact-box, field, btn, alert) -- */
+/*=======================================================================================CONTACTPAGE====================================================================================*/
+.contact-container {
+    position: relative;
+    width: 100%;
+    height: 65%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+}
+
+.contact-container textarea {
+    font-family: "Inter", sans-serif;
+}
+
+.mobile-contact {
+    margin-top: 0px;
+}
+
+.contact-box {
+    max-width: 930px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 1rem 1rem 30px 10px rgba(0, 0, 0, .4);
+}
+
+.left iframe {
+    padding: 15px 0px;
+    padding-left: 40px;
+    width: 100%;
+    height: 560px;
+}
+
+.right {
+    padding: 25px 40px;
+}
+
+.right h1 {
+    position: relative;
+    padding: 0 0 10px;
+    margin-bottom: 20px;
+}
+
+.right h1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 180px;
+    background-color: rgb(194, 155, 49);
+}
+
+.right p {
+    margin-top: 20px;
+}
+
+.right p a {
+    text-decoration: none;
+    color: rgb(194, 155, 49);
+}
+
+.cz-right h1::after {
+    width: 260px;
+}
+
+.field {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    background-color: rgba(230, 230, 230);
+    padding: .5rem 1rem;
+    margin-bottom: 22px;
+    transition: 1s;
+    border-radius: 5px;
+}
+
+.field:hover {
+    background-color: rgba(223, 189, 97, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.field:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    -webkit-text-fill-color: black !important;
+    border: 2px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 5px !important;
+    transition: 1s !important;
+}
+
+.right textarea {
+    min-height: 150px;
+}
+
+.btn{
+    width: 100%;
+    padding: .5rem 1rem;
+    background-color: transparent;
+    font-size: 1.1rem;
+    border: 2px solid rgb(194, 155, 49);
+    color: black;
+    border-radius: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn:hover {
+    background-color: rgb(194, 155, 49);
+    border: 2px solid transparent;
+}
+
+.field:focus {
+    border: 2px solid rgba(0, 0, 0, .2);
+    background-color: rgba(223, 189, 97, 0.9);
+    transition: 1s;
+}
+
+.line {
+    width: 70%;
+    text-align: left;
+}
+
+
+
+/* -- TICKETS -- */
+/*=======================================================================================TICKETS====================================================================================*/
+
+form input, select, .counter-escort {
+    margin-top: 12px;
+}
+
+.tutorialHeader {
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.tutorial {
+    width: 100%;
+    height: auto;
+    margin: 100px auto;
+    max-width: 930px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 1rem 1rem 30px 10px rgba(0, 0, 0, .4);
+}
+
+.tutorial span {
+    font-weight: bolder;
+    font-family: "Inter", sans-serif;
+}
+
+.tutorial p {
+    line-height: 1.5;
+}
+
+.tutorial .main-text {
+    margin-top: 5px;
+}
+
+.left img {
+    padding: 15px 40px;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.counter {
+    background-color: rgba(230, 230, 230);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.counter h2 {
+    color: rgb(194, 155, 49);
+}
+
+.custom-select {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    background-color: rgba(230, 230, 230);
+    padding: .5rem 1rem;
+    transition: 1s;
+    border-radius: 5px;
+    position: relative;
+}
+
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('../images/common/caret-up-solid.svg');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    padding-right: 20px;
+    transition: all .5s ease;
+}
+
+.custom-select option {
+    font-size: 15px;
+}
+
+option[value=""] {
+    display: none;
+}
+
+.custom-select:hover {
+    background-color: rgba(223, 189, 97, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.custom-select:focus {
+    background-image: url('../images/common/caret-down-solid.svg');
+    background-position: right 10px center;
+    transition: all .5s ease;
+}
+
+.tickets-field {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    background-color: rgba(230, 230, 230);
+    padding: .5rem 1rem;
+    transition: 1s;
+    border-radius: 5px;
+    margin-bottom: 12px;
+}
+
+.tickets-field:hover {
+    background-color: rgba(223, 189, 97, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.tickets-field:focus {
+    border: 2px solid rgba(0, 0, 0, .2);
+    background-color: rgba(223, 189, 97, 0.9);
+    transition: 1s;
+}
+
+.tickets-field:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    box-shadow: 0 0 0 1000px rgba(230, 230, 230) inset !important;
+    -webkit-text-fill-color: black !important;
+    border: 2px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 5px !important;
+    transition: 1s !important;
+}
+
+.player-field {
+    background-color: #fff;
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    padding: .25rem .5rem;
+    transition: 1s;
+    border-radius: 5px;
+    margin: 12px 0px;
+    cursor: pointer;
+}
+
+.player-field:hover {
+    background-color: rgba(223, 189, 97, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.last-field {
+    margin-top: 0px;
+}
+
+.counter-field {
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    padding: 3px 3px;
+    transition: 1s;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.counter-field::placeholder {
+    color: black;
+}
+
+.counter-field:hover {
+    background-color: rgba(223, 189, 97, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.remove-button {
+    background-color: transparent;
+    border: none;
+    margin-top: 10px;
+    float: left;
+    padding-left: 15px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.price p {
+    margin-top: 0px;
+}
+
+.disabled-button {
+    background-color: #d3d3d3;
+    color: #808080;
+    border: 1px solid rgb(114, 114, 114);
+}
+.disabled-button:hover {
+    background-color: #d3d3d3;
+    color: #808080;
+    border: 1px solid red;
+}
+
+.info-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .info-btn {
+    color: rgb(194, 155, 49);
+    cursor: pointer;
+    font-size: 30px;
+    transition: background-color 0.5s ease-in-out;
+  }
+  
+  .info-btn:hover {
+    color: #5a5a5a;
+  }
+
+  .info-popup {
+    visibility: hidden;
+    font-family: "Inter", sans-serif;
+    width: 250px;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: left;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    transition: opacity .5s ease;
+    transition-delay: 0s;
+  }
+  
+  .info-container:hover .info-popup {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }  
+
+  .info-container:not(:hover) .info-popup {
+    visibility: hidden;
+    opacity: 0;
+    transition-delay: 0s;
+  }
+
+.ticktes-end {
+    background-color: #fff;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    width: 50%;
+    margin-top: 150px;
+    border-radius: 10px;
+}
+
+.gold {
+    color: rgb(194, 155, 49) !important;
+}
+
+
+/* -- CANCEL -- */
+/*=======================================================================================CANCEL====================================================================================*/
+
+.cancel-container {
+    position: relative;
+    width: 100%;
+    height: 65%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+}
+
+.remove-box {
+    max-width: 930px;
+    width: 100%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 1rem 1rem 30px 10px rgba(0, 0, 0, .4);
+}
+
+.remove-box h1 {
+    font-size: 2.5rem;
+    margin-bottom: 32px;
+}
+
+.remove-box h1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 360px;
+    background-color: rgb(194, 155, 49);
+}
+
+.tickets-cancel {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    background-color: rgba(230, 230, 230);
+    padding: 1rem 1rem;
+    transition: 1s;
+    border-radius: 5px;
+    margin-bottom: 22px;
+}
+
+.tickets-cancel:hover {
+    background-color: rgba(223, 189, 97, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: 1s;
+}
+
+.tickets-cancel:focus {
+    border: 2px solid rgba(0, 0, 0, .2);
+    background-color: rgba(223, 189, 97, 0.9);
+    transition: 1s;
+}
+
+.cancel-btn{
+    width: 100%;
+    padding: .5rem 1rem;
+    background-color: transparent;
+    font-size: 1.1rem;
+    border: 2px solid rgb(194, 155, 49);
+    color: black;
+    border-radius: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.cancel-btn:hover {
+    background-color: rgb(194, 155, 49);
+    border: 2px solid transparent;
+}
+
+
+/* zrušení rezervace - potvrzení a úvodní text */
+.cancel-confirm {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.cancel-confirm h2 {
+    color: #C29B31;
+    margin-bottom: 12px;
+}
+
+.cancel-confirm p {
+    margin-bottom: 8px;
+}
+
+/* odkaz na vytvoření nové rezervace uvnitř potvrzení */
+.cancel-confirm a {
+    color: #C29B31;
+    text-decoration: underline;
+}
+
+.cancel-confirm a:hover {
+    color: #A07E20;
+}
+.cancel-intro {
+    margin-bottom: 20px;
+    color: #444;
+    line-height: 1.6;
+}
+
+
+/* ---------------------------------------------------------------------
+   Okraj od kraje obrazovky na mobilu – stejně jako stránka Ocenění.
+   Formulář (.contact-box) i návod (.tutorial) drží ~20px od kraje,
+   aby box nelepil na okraj displeje.
+   --------------------------------------------------------------------- */
+@media (max-width: 991px) {
+    .contact-container.page-width {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tutorial {
+        width: 90%;
+    }
+}

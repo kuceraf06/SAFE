@@ -1,0 +1,162 @@
+/* =====================================================================
+   SAFE – stránka O AKCI (about)
+   ===================================================================== */
+
+/*=======================================================================================ABOUTPAGE====================================================================================*/
+
+.about-page {
+    /* stejná šířka jako stránka Ocenění (.awardedMain), aby byl okraj od kraje
+       obrazovky všude stejný */
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+.about-btn {
+    display: flex;
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+.about-content a {
+    color: #C29B31;
+    transition: color .2s ease;
+}
+
+.about-container{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1400px;
+    background-color: #fff;
+    box-shadow: 1rem 1rem 30px 10px rgba(0, 0, 0, .4);
+    padding: 20px;
+}
+
+.about-page hr {
+    margin: 100px auto;
+    width: 60%;
+    max-width: 1400px;
+    height: 3px;
+    background-color: #333;
+    border: none;
+}
+
+.aboutpage{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.about-image {
+    flex: 0.805;
+    margin-right: 100px;
+    overflow: hidden;
+}
+
+.about-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    transition: .5s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.2);
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-content h2 {
+    font-size: 23px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.about-content h3 {
+    font-size: 20px;
+    color: rgb(194, 155, 49);
+    font-weight: 500;
+}
+
+.about-content p{
+    font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.bolder  {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(66, 175, 33);
+}
+
+.site-links {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(194, 155, 49);
+}
+
+.about-content strong{
+    font-weight: bold;
+}
+
+.button-about {
+    display: flex;
+    font-weight: 500;
+    padding: 10px 20px;
+    font-size: 19px;
+    text-decoration: none;
+    border-radius: 25px;
+    margin-top: 30px;
+    transition: .3s ease;
+    background-color: rgb(194, 155, 49);
+    border: 2px solid rgb(194, 155, 49);
+    color: #fff;
+}
+
+#history, #location {
+    scroll-margin-top: 250px;
+}
+
+.second-btn {
+    margin-left: 30px;
+}
+
+#btn-break {
+    display: none;
+}
+
+.button-about:hover {
+    background-color: rgb(161, 127, 32);
+}
+
+
+
+/* ---------------------------------------------------------------------
+   Mobil – text vedle obrázku (teď pod ním) musí lícovat s levým okrajem
+   obrázku a jít přes celou šířku boxu, aby nevyčníval vpravo.
+   (Musí být tady v about.css, protože ten se načítá až po responsivity.css
+   a jinak by ho základní .aboutpage { align-items: center } přebilo.)
+   --------------------------------------------------------------------- */
+@media (max-width: 815px) {
+    .aboutpage {
+        align-items: stretch;
+    }
+
+    .about-content {
+        width: 100%;
+        flex: none;
+        text-align: left;
+    }
+
+    /* obrázek zůstává vycentrovaný nad textem */
+    .about-image {
+        align-self: center;
+    }
+}

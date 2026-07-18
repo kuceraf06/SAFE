@@ -1,0 +1,19 @@
+STRUKTURA SLOŽKY IMAGES
+=======================
+
+Obrázky jsou rozdělené podle stránek/účelu (stejně jako CSS):
+
+  common/      - loga, ikony sociálních sítí, favicony, sdílené prvky
+                 (SAFE-logo.png, FB.png, IG.png, caret-*.svg, favicony...)
+  home/        - pozadí úvodní stránky (safe25.jpg)
+  about/       - obrázky na stránce O AKCI (kino-sokol, tým)
+  awards/      - fotky oceněných hráčů (spec-*, MVP, palkar, polar, CT...)
+  events/      - galerie minulých ročníků (SAFE-*, 251108_*, safe0*...)
+  sponsors/    - loga sponzorů a partnerů (logo_*, *_a, *_b...)
+  reservation/ - pozvánka na akci (invation.png)
+  uploads/     - sem admin ukládá nově nahrané obrázky
+  _nepouzivane/- obrázky, které se aktuálně nikde nepoužívají
+
+Cesty v databázi i v kódu odkazují na obrázky včetně podsložky,
+např. 'images/awards/spec-Kacka.png'. Nově nahrané obrázky přes
+administraci se ukládají do 'images/uploads/'.
