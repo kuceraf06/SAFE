@@ -48,13 +48,16 @@ function scm_public_db(): ?PDO
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        if ($needsInit) {
-            $dbLib = __DIR__ . '/../../admin/lib/db.php';
-            if (is_file($dbLib)) {
-                require_once $dbLib;
-                if (function_exists('scm_db_init_schema')) {
-                    scm_db_init_schema($conn);
-                }
+        $dbLib = __DIR__ . '/../../admin/lib/db.php';
+        if (is_file($dbLib)) {
+            require_once $dbLib;
+            if ($needsInit && function_exists('scm_db_init_schema')) {
+                scm_db_init_schema($conn);
+            } elseif (function_exists('scm_db_migrate')) {
+                // Databáze už existuje (typicky po nahrání nové verze kódu na
+                // server). Doplníme sloupce, které v ní ještě nejsou - jinak by
+                // web nevěděl o ceně nastavené v administraci.
+                scm_db_migrate($conn);
             }
         }
     } catch (PDOException $e) {
@@ -123,6 +126,22 @@ function safe_reservation_active(): bool
 {
     $row = scm_fetch_one('SELECT is_active FROM reservation_status ORDER BY id LIMIT 1');
     return (int)($row['is_active'] ?? 0) === 1;
+}
+
+/** Výchozí cena vstupenky pro doprovod, když v databázi ještě nic není (Kč). */
+const SAFE_ESCORT_PRICE_DEFAULT = 250;
+
+/**
+ * Cena jedné vstupenky pro doprovod v Kč, jak je nastavená v administraci.
+ * Hodnota 0 znamená, že jsou vstupenky zdarma.
+ */
+function safe_escort_price(): int
+{
+    $row = scm_fetch_one('SELECT escort_price FROM reservation_status ORDER BY id LIMIT 1');
+    if ($row === null || !isset($row['escort_price'])) {
+        return SAFE_ESCORT_PRICE_DEFAULT;   // prázdná nebo stará databáze
+    }
+    return max(0, (int)$row['escort_price']);
 }
 
 /** Řádky programu (seřazené). */

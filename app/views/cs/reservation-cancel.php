@@ -26,7 +26,7 @@ $cancelError   = ($cancel['class'] === 'alert-failed');
                 <?php if ($cancelDone): ?>
                     <div class="cancel-confirm">
                         <h2>Rezervace vstupenek byla zrušena</h2>
-                        <p>Na váš e-mail jsme zaslali potvrzení o zrušení. Děkujeme.</p>
+                        <p>Na váš e-mail jsme zaslali potvrzení o zrušení. Pokud do pár minut nedorazí, podívejte se prosím i do složky Spam nebo Hromadné. Děkujeme.</p>
                         <p>Chcete si rezervovat znovu? <a href="<?= url('reservation') ?>">Vytvořit novou rezervaci</a></p>
                     </div>
                 <?php else: ?>

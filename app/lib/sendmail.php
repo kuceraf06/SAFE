@@ -75,6 +75,28 @@ function safe_smtp_config(): ?array
  * Připraví PHPMailer podle nastavení. Vrací null a nastaví chybu,
  * když nastavení chybí.
  */
+/**
+ * Doména, ze které web odesílá poštu (vytažená z adresy odesílatele).
+ *
+ * Používá se do Message-ID, aby v něm byla naše skutečná doména
+ * (minerskladno.cz) místo názvu serveru, který PHPMailer jinak dosadí sám.
+ */
+function safe_mail_domain(): string
+{
+    $cfg  = safe_smtp_config() ?? [];
+    $from = trim((string)($cfg['from_email'] ?? SAFE_MAIL_ADDRESS)) ?: SAFE_MAIL_ADDRESS;
+
+    $zavinac = strrchr($from, '@');
+    if ($zavinac === false) {
+        return 'minerskladno.cz';
+    }
+
+    $domena = strtolower(ltrim($zavinac, '@'));
+
+    // pojistka, kdyby v nastavení byl nesmysl
+    return preg_match('/^[a-z0-9.-]+\.[a-z]{2,}$/', $domena) ? $domena : 'minerskladno.cz';
+}
+
 function safe_mail_factory(?array $transport = null): ?PHPMailer
 {
     $mail = new PHPMailer(true);   // true = vyhazovat výjimky
@@ -82,6 +104,26 @@ function safe_mail_factory(?array $transport = null): ?PHPMailer
     $mail->Encoding = PHPMailer::ENCODING_BASE64;
     $mail->Timeout  = 12;
     $mail->isHTML(true);
+
+    // ---------------------------------------------------------------------
+    //  Hlavičky, které rozhodují o tom, jestli zpráva skončí ve spamu
+    // ---------------------------------------------------------------------
+
+    // Message-ID (jedinečné číslo zprávy). PHPMailer ho sám skládá z názvu
+    // serveru – na běžném serveru z toho vyleze něco jako "<...@vm>" nebo
+    // "<...@localhost>". Filtry (hlavně Gmail a Seznam) berou nesmyslnou nebo
+    // neexistující doménu v Message-ID jako známku špatně nastaveného
+    // rozesílače. Proto ji nastavíme na naši skutečnou doménu.
+    $mail->MessageID = sprintf(
+        '<%s.%s@%s>',
+        date('YmdHis'),
+        bin2hex(random_bytes(8)),
+        safe_mail_domain()
+    );
+
+    // X-Mailer normálně hlásí "PHPMailer 6.12.0 (…)". Filtrům to říká, že
+    // zprávu poslal automat, ne člověk. Není důvod to prozrazovat.
+    $mail->XMailer = ' ';
 
     if (safe_mailer() === 'mail') {
         $mail->isMail();

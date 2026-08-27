@@ -59,6 +59,9 @@ Když do gitu pošleš novou verzi kódu a kolega ji přetáhne:
 - **Databáze se NEPŘEPÍŠE**, protože v gitu není (je v `.gitignore`). Přetažení
   z gitu se dotkne jen kódu, ne živé databáze na serveru.
 - Živá data (změny přes administraci) tak zůstanou zachovaná.
+- Když nová verze kódu potřebuje v databázi nový sloupec, doplní se **sám**
+  při prvním načtení webu nebo administrace (viz `scm_db_migrate()` v
+  `admin/lib/db.php`). Ručně se nespouští nic.
 
 ## Administrace
 
@@ -67,7 +70,9 @@ Přihlášení: `/admin/login/`
 - **Termín** – datum a čas akce (zobrazuje se na úvodu a v sekci O akci)
 - **Pozvánka** – obrázek pozvánky (sekce Vstupenky)
 - **Program** – řádky programu galavečera (CZ + EN)
-- **Vstupenky** – přepínač, zda jsou rezervace zapnuté nebo vypnuté
+- **Vstupenky** – přepínač, zda jsou rezervace zapnuté nebo vypnuté, a cena
+  vstupenky pro doprovod (v celých Kč, **0 = zdarma**). Hráči a trenéři mají
+  vstup vždy zdarma, cena se jich netýká.
 - **Minulé ročníky** – správa ročníků s textovým editorem **Quill** (zdarma,
   bez registrace); nadpis a popis lze formátovat (tučně, kurzíva, nadpisy,
   seznamy, odkazy), ke každému ročníku patří galerie obrázků

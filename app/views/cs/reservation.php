@@ -8,6 +8,7 @@ $bodyClass = 'ticketspage-body';
 $pageCss   = 'reservation';
 
 $isReservationActive = safe_reservation_active();
+$escortPrice         = safe_escort_price();   // cena za lístek z administrace (0 = zdarma)
 
 // zpracování odeslaného formuláře (zápis do tabulky + potvrzovací e-mail)
 $res = $isReservationActive ? safe_handle_reservation('cs') : ['message' => '', 'class' => ''];
@@ -56,7 +57,7 @@ $res = $isReservationActive ? safe_handle_reservation('cs') : ['message' => '', 
                             <input class="counter-field" type="number" id="escort" name="doprovod" min="0" max="5" placeholder="0" value="0" required>
                         </div>
                         <div class="price">
-                            <p id="escortPrice"><strong>Cena:</strong> 0 Kč</p>
+                            <p id="escortPrice"><strong>Cena:</strong> <?= $escortPrice > 0 ? '0 Kč' : 'Zdarma' ?></p>
                         </div>
                     </div>
                     <input type="text" name="jméno" placeholder="Vaše celé jméno*" class="tickets-field" required>
@@ -160,15 +161,18 @@ $res = $isReservationActive ? safe_handle_reservation('cs') : ['message' => '', 
             });
         }
 
+        // cena za jeden lístek doprovodu podle nastavení v administraci (0 = zdarma)
+        var escortUnitPrice = <?= (int)$escortPrice ?>;
+
         var escortInput = document.getElementById("escort");
         if (escortInput) {
             escortInput.addEventListener("input", function () {
                 var escortCount = parseInt(escortInput.value);
                 if (isNaN(escortCount)) { escortCount = 0; }
-                var price = escortCount * 250;
+                var price = escortCount * escortUnitPrice;
                 var priceElement = document.getElementById("escortPrice");
                 if (priceElement) {
-                    priceElement.innerHTML = "<strong>Cena:</strong> " + price + " Kč";
+                    priceElement.innerHTML = "<strong>Cena:</strong> " + (escortUnitPrice > 0 ? price + " Kč" : "Zdarma");
                 }
             });
         }

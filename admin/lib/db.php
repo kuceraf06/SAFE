@@ -84,11 +84,13 @@ function scm_db_init_schema(PDO $db): void
         )
     SQL);
 
-    // Stav vstupenek/rezervací (zapnuto/vypnuto)
+    // Stav vstupenek/rezervací (zapnuto/vypnuto) + cena lístku pro doprovod.
+    // escort_price je v celých Kč, 0 = vstupenky zdarma.
     $db->exec(<<<SQL
         CREATE TABLE IF NOT EXISTS reservation_status (
-            id         INTEGER PRIMARY KEY AUTOINCREMENT,
-            is_active  INTEGER NOT NULL DEFAULT 1
+            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            is_active     INTEGER NOT NULL DEFAULT 1,
+            escort_price  INTEGER NOT NULL DEFAULT 250
         )
     SQL);
 
@@ -135,6 +137,9 @@ function scm_db_init_schema(PDO $db): void
         )
     SQL);
 
+    // doplnění sloupců, které v už existujících databázích chybí
+    scm_db_migrate($db);
+
     // automatické naplnění výchozími daty při prvním spuštění (prázdné tabulky)
     if (is_file(__DIR__ . '/seed_data.php')) {
         require_once __DIR__ . '/seed_data.php';
@@ -143,5 +148,36 @@ function scm_db_init_schema(PDO $db): void
         } catch (\Throwable $e) {
             error_log('SAFE seed: ' . $e->getMessage());
         }
+    }
+}
+
+/**
+ * Doplní sloupce, které v databázi ještě nejsou.
+ * -----------------------------------------------------------------------------
+ * Proč to tu je: databáze NENÍ v gitu, takže na serveru zůstává ta stará i po
+ * nahrání nové verze kódu. CREATE TABLE IF NOT EXISTS na ni nesáhne. Nový
+ * sloupec je proto potřeba doplnit ručně přes ALTER TABLE.
+ *
+ * Funkce je idempotentní - co už existuje, přeskočí. Uložená data nemění.
+ */
+function scm_db_migrate(PDO $db): void
+{
+    // cena vstupenky pro doprovod (Kč); u starých databází se doplní s 250
+    scm_db_add_column($db, 'reservation_status', 'escort_price', 'INTEGER NOT NULL DEFAULT 250');
+}
+
+/** Přidá sloupec do tabulky, pokud tam ještě není. Chybu jen zaloguje. */
+function scm_db_add_column(PDO $db, string $table, string $column, string $definition): void
+{
+    try {
+        $existing = $db->query('PRAGMA table_info(' . $table . ')')->fetchAll();
+        foreach ($existing as $col) {
+            if (($col['name'] ?? '') === $column) {
+                return;   // sloupec už existuje - nic neděláme
+            }
+        }
+        $db->exec('ALTER TABLE ' . $table . ' ADD COLUMN ' . $column . ' ' . $definition);
+    } catch (\Throwable $e) {
+        error_log('SAFE migrace (' . $table . '.' . $column . '): ' . $e->getMessage());
     }
 }

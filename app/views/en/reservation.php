@@ -8,6 +8,7 @@ $bodyClass = 'ticketspage-body';
 $pageCss   = 'reservation';
 
 $isReservationActive = safe_reservation_active();
+$escortPrice         = safe_escort_price();   // ticket price from the administration (0 = free)
 
 // processing of the submitted form (writes to the table + confirmation e-mail)
 $res = $isReservationActive ? safe_handle_reservation('en') : ['message' => '', 'class' => ''];
@@ -55,7 +56,7 @@ $res = $isReservationActive ? safe_handle_reservation('en') : ['message' => '', 
                             <input class="counter-field" type="number" id="escort" name="doprovod" min="0" max="5" placeholder="0" value="0" required>
                         </div>
                         <div class="price">
-                            <p id="escortPrice"><strong>Price:</strong> 0 Kč</p>
+                            <p id="escortPrice"><strong>Price:</strong> <?= $escortPrice > 0 ? '0 Kč' : 'Free' ?></p>
                         </div>
                     </div>
                     <input type="text" name="jméno" placeholder="Your full name*" class="tickets-field" required>
@@ -156,15 +157,18 @@ $res = $isReservationActive ? safe_handle_reservation('en') : ['message' => '', 
             });
         }
 
+        // price per one accompaniment ticket, set in the administration (0 = free)
+        var escortUnitPrice = <?= (int)$escortPrice ?>;
+
         var escortInput = document.getElementById("escort");
         if (escortInput) {
             escortInput.addEventListener("input", function () {
                 var escortCount = parseInt(escortInput.value);
                 if (isNaN(escortCount)) { escortCount = 0; }
-                var price = escortCount * 250;
+                var price = escortCount * escortUnitPrice;
                 var priceElement = document.getElementById("escortPrice");
                 if (priceElement) {
-                    priceElement.innerHTML = "<strong>Price:</strong> " + price + " CZK";
+                    priceElement.innerHTML = "<strong>Price:</strong> " + (escortUnitPrice > 0 ? price + " CZK" : "Free");
                 }
             });
         }

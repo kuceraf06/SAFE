@@ -26,7 +26,7 @@ $cancelError   = ($cancel['class'] === 'alert-failed');
                 <?php if ($cancelDone): ?>
                     <div class="cancel-confirm">
                         <h2>Ticket reservation has been cancelled</h2>
-                        <p>We have sent a confirmation to your e-mail. Thank you.</p>
+                        <p>We have sent a confirmation to your e-mail. If it does not arrive within a few minutes, please check your spam folder. Thank you.</p>
                         <p>Want to book again? <a href="<?= url('reservation') ?>">Create a new reservation</a></p>
                     </div>
                 <?php else: ?>

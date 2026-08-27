@@ -29,8 +29,9 @@ function safe_public_url(): string
     return $url;
 }
 
-/** Cena jedné vstupenky pro doprovod (Kč). */
-const SAFE_ESCORT_PRICE = 250;
+// Cena jedné vstupenky pro doprovod se nastavuje v administraci
+// (Vstupenky -> Cena vstupenky pro doprovod) a čte se přes safe_escort_price()
+// z app/lib/data.php. Hodnota 0 = vstupenky zdarma.
 
 /**
  * Zpracuje POST z formuláře rezervace.
@@ -54,7 +55,7 @@ function safe_handle_reservation(string $lang = 'cs'): array
     if ($count < 0) {
         $count = 0;
     }
-    $escortPrice = $count * SAFE_ESCORT_PRICE;
+    $escortPrice = $count * safe_escort_price();
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return ['message' => $t['bad_email'], 'class' => 'alert-failed'];
@@ -152,7 +153,7 @@ function safe_reservation_texts(string $lang): array
     if ($lang === 'en') {
         return [
             'subject'   => 'Ticket reservation confirmation',
-            'ok'        => 'Your reservation has been created.',
+            'ok'        => 'Your reservation has been created. We have sent the confirmation to your e-mail – if it does not arrive within a few minutes, please check your spam folder.',
             'error'     => 'The reservation could not be created. Please try again later or contact us at safe@minerskladno.cz.',
             'duplicate' => 'This e-mail address has already been used for a reservation.',
             'bad_email' => 'Please enter a valid e-mail address.',
@@ -162,12 +163,24 @@ function safe_reservation_texts(string $lang): array
 
     return [
         'subject'   => 'Potvrzení rezervace lístků',
-        'ok'        => 'Rezervace byla úspěšně vytvořena.',
+        'ok'        => 'Rezervace byla úspěšně vytvořena. Potvrzení jsme vám poslali na e-mail – pokud do pár minut nedorazí, podívejte se prosím i do složky Spam nebo Hromadné.',
         'error'     => 'Rezervaci se nepodařilo vytvořit. Zkuste to prosím později nebo nás kontaktujte na safe@minerskladno.cz.',
         'duplicate' => 'Tento e-mail už byl použit pro rezervaci.',
         'bad_email' => 'Zadejte prosím platnou e-mailovou adresu.',
         'bad_name'  => 'Zadejte prosím své celé jméno.',
     ];
+}
+
+/**
+ * Cena pro výpis návštěvníkovi. Nula se nepíše jako „0 Kč“, ale „Zdarma“ –
+ * jinak by u vstupenek zdarma vypadal e-mail jako chyba.
+ */
+function safe_format_price(int $price, string $lang = 'cs'): string
+{
+    if ($price <= 0) {
+        return $lang === 'en' ? 'Free' : 'Zdarma';
+    }
+    return $price . ' Kč';
 }
 
 /** Sestaví HTML tělo potvrzovacího e-mailu. */
@@ -213,7 +226,7 @@ function safe_reservation_email_body(
             <ul>
                 <li><strong>Your reservation code is:</strong> " . $e($code) . "</li>
                 <li><strong>Number of accompaniment:</strong> " . $e($count) . "</li>
-                <li><strong>Price for tickets:</strong> " . $e($escortPrice) . " Kč</li>
+                <li><strong>Price for tickets:</strong> " . $e(safe_format_price($escortPrice, 'en')) . "</li>
                 <li><strong>Name:</strong> " . $e($name) . "</li>
                 <li><strong>Email:</strong> " . $e($email) . "</li>
             </ul>";
@@ -243,7 +256,7 @@ function safe_reservation_email_body(
         <ul>
             <li><strong>Váš rezervační kód:</strong> " . $e($code) . "</li>
             <li><strong>Počet vstupenek pro doprovod:</strong> " . $e($count) . "</li>
-            <li><strong>Cena:</strong> " . $e($escortPrice) . " Kč</li>
+            <li><strong>Cena:</strong> " . $e(safe_format_price($escortPrice, 'cs')) . "</li>
             <li><strong>Jméno:</strong> " . $e($name) . "</li>
             <li><strong>Email:</strong> " . $e($email) . "</li>
         </ul>";
@@ -355,7 +368,7 @@ function safe_cancel_texts(string $lang): array
             'bad_code'     => 'A record with this code does not exist.',
             'already'      => 'This reservation has already been cancelled.',
             'failed'       => 'The reservation could not be cancelled. Please try again later or contact us at safe@minerskladno.cz.',
-            'ok'           => 'Your reservation has been cancelled.',
+            'ok'           => 'Your reservation has been cancelled. We have sent you a confirmation – if it does not arrive within a few minutes, please check your spam folder.',
             'mail_subject' => 'Reservation cancellation',
             'mail_title'   => 'Your ticket reservation has been cancelled',
             'mail_body'    => 'Your reservation with the code <strong>"%s"</strong> and e-mail <strong>"%s"</strong> has just been cancelled.',
@@ -370,7 +383,7 @@ function safe_cancel_texts(string $lang): array
         'bad_code'     => 'Záznam s tímto kódem neexistuje.',
         'already'      => 'Tato rezervace už byla zrušena.',
         'failed'       => 'Rezervaci se nepodařilo zrušit. Zkuste to prosím později nebo nás kontaktujte na safe@minerskladno.cz.',
-        'ok'           => 'Vaše rezervace byla úspěšně zrušena.',
+        'ok'           => 'Vaše rezervace byla úspěšně zrušena. Potvrzení jsme vám poslali na e-mail – pokud do pár minut nedorazí, podívejte se prosím i do složky Spam nebo Hromadné.',
         'mail_subject' => 'Zrušení rezervace',
         'mail_title'   => 'Rezervace vstupenek byla zrušena',
         'mail_body'    => 'Vaše rezervace s kódem <strong>„%s“</strong> a e-mailem <strong>„%s“</strong> byla právě zrušena.',
